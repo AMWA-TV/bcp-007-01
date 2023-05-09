@@ -1,10 +1,10 @@
-amwa_id: BCP-TEMPLATE
-url: https://specs.amwa.tv/bcp-template
-name: AMWA NMOS Best Common Practice Template
-status: Continuing
-repo_name: bcp-template
-alt_repo_name: nmos-bcp-template
-repo_url: https://github.com/AMWA-TV/bcp-template
+amwa_id: BCP-NMOS-NDI
+url: https://specs.amwa.tv/bcp-nmos-ndi
+name: AMWA BCP-NMOS-NDI: NMOS With NDI
+status: Work In Progress
+repo_name: bcp-nmos-ndi
+alt_repo_name: nmos-bcp-nmos-ndi
+repo_url: https://github.com/AMWA-TV/bcp-nmos-ndi
 releases:
 default_branch: main
 show_in_index: false

@@ -1,7 +1,7 @@
-# \[Work In Progress\] AMWA NMOS Template Specification
+# \[Work In Progress\] AMWA NMOS With NDI
 
-[![Lint Status](https://github.com/AMWA-TV/bcp-template/workflows/Lint/badge.svg)](https://github.com/AMWA-TV/bcp-template/actions?query=workflow%3ALint)
-[![Render Status](https://github.com/AMWA-TV/bcp-template/workflows/Render/badge.svg)](https://github.com/AMWA-TV/bcp-template/actions?query=workflow%3ARender)
+[![Lint Status](https://github.com/AMWA-TV/bcp-nmos-ndi/workflows/Lint/badge.svg)](https://github.com/AMWA-TV/bcp-nmos-ndi/actions?query=workflow%3ALint)
+[![Render Status](https://github.com/AMWA-TV/bcp-nmos-ndi/workflows/Render/badge.svg)](https://github.com/AMWA-TV/bcp-nmos-ndi/actions?query=workflow%3ARender)
 
 This repository holds the source for this Specification, part of the family of [Networked Media Open Specifications](https://specs.amwa.tv/nmos) from the [Advanced Media Workflow Association](https://amwa.tv)
 
@@ -9,19 +9,18 @@ This repository holds the source for this Specification, part of the family of [
 
 ### What does it do?
 
-- It provides a template for AMWA NMOS Interface Specifcations.
+- xxx
 
 ### Why does it matter?
 
-- It helps ensure consistency between NMOS Specifications.
-- It helps us test our continuous integration.
+- xxx
+- xxx
 
 ### How does it work?
 
-- It contains examples of [documentation](docs/), and [examples](examples/)
-- It provides a style guide and other advice for specification authors
-  - This includes how to configure the repo for automatic linting and rendering to `specs.amwa.tv`
-- Select `AMWA-TV/bcp-template` as the template when creating the new repo.
+- xxx
+- xxx
+- xxx
 
 <!-- INTRO-END -->
 
