@@ -6,7 +6,6 @@
 
 _(c) AMWA 2023, CC Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)_
 
-![NMOS logo](images/NMOS-logo.png)
 
 ## Introduction
 
@@ -20,7 +19,7 @@ See also the [NMOS Technical Overview](https://specs.amwa.tv/nmos/main/docs/Tech
 ## Use of Normative Language
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
-and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
+and "OPTIONAL" in this document are to be interpreted as described in [RFC-2119](https://datatracker.ietf.org/doc/html/rfc2119).
 
 ## Dependencies
 This document depends upon the following reference documents:
@@ -47,9 +46,29 @@ A receiver of NDI an NDI stream as defined in the NDI SDK Documentation. This sh
 ## Model
 > Describe the model here, including use cases of NMOS NDI->NMOS NDI, NATIVE NDI->NMOS NDI. Include discovery model for NMOS and Native Senders and Receivers.
 
-## Transport Type and Parameters
+
+## NDI IS-04 Sources, Flows and Senders
+### Constraints
+#### Sender Capabilities
+Mention Codecs and protocols here.
+
+
+
+### Mux Flows
+
+### Metadata
+Metadata flow may be implicitly connected when video connection is made.
+Metadata flow may be bidirectional, i.e. one flow in each direction (e.g. PTZ camera control). These flows are not explicitly connected via controller.
+
+
+## NDI IS-04 Receivers
+
+#### Receiver Capabilities
+Mention Codecs and protocols here.
+
+## NDI IS-05 Senders and Receivers
 ### Transport Type
-New transport type for NDI:
+NDI Flows shall utilize a new transport type in IS-05:
 
 ```
 urn:x-nmos:transport:ndi
@@ -80,21 +99,19 @@ The name of the stream as declared by the NDI Sender. The stream may contains mu
 **group_name**
 Indicate the NDI group of the source. Null indicates the default group.
 
-**protocols**
-Indicate the NDI sub-protocol(s) to use/allow
+**protocols**    (Move to Receiver Capabilities)  Indicate the NDI sub-protocol(s) to use/allow
 - auto (default)
 - unicast
 - multicast
 - tcp
 - rudp
 
-**audio_codec**
-Indicate the advanced audio codec to use. The values shall be compatible with the constraints. If not specified it defaults to “native”. (schema MUST be flexible to allow new values)
+**audio_codec**    (Move to Receiver Capabilities)  Indicate the advanced audio codec to use. The values shall be compatible with the constraints. If not specified it defaults to “native”. (schema MUST be flexible to allow new values)
 Possible values are:
 - “native” when and advanced codec is not used
 - “aac” to use the AAC codec. (advanced SDK required)
 
-**video_codec**
+**video_codec**    (Move to Receiver Capabilities)  
 Indicate the advanced video codec to use. The values shall be compatible with the constraints. If not specified it defaults to “native”. (schema MUST be flexible to allow new values) .Possible values are:
 - “native” when an advanced codec is not used
 - “h264” (advanced SDK required)
@@ -131,7 +148,7 @@ The name of the stream as declared by the NDI sender. The stream may contain mul
 **group_name**
 Indicate the NDI group of the source, null indicates the default group
 
-**protocols**
+**protocols**    (Move to Receiver Capabilities)  
 Indicate the NDI sub-protocol(s) to use/allow
 - auto (default)
 - unicast
@@ -142,25 +159,21 @@ Indicate the NDI sub-protocol(s) to use/allow
 **discovery_servers**
 Provides a list of servers for discovering the NDI streams when server_host is set to auto. If this parameter is set to auto the Receiver should establish for itself which discovery server it should use, based on its own internal configuration or default to mDNS discovery.
 
-**audio_codec**
+**audio_codec**  (Move to Receiver Capabilities)  
 Indicate the advanced audio codec used by the stream. The values shall be compatible with the constraints. If not specified it defaults to “native”. (schema MUST be flexible to allow new values)
 Possible values are:
 - “native” when and advanced codec is not used
 - “aac” to use the AAC codec. (advanced SDK required)
 
-**video_codec**
+**video_codec**    (Move to Receiver Capabilities)  
 Indicate the advanced video codec used by the stream. The values shall be compatible with the constraints. If not specified it defaults to “native”. (schema MUST be flexible to allow new values) .Possible values are:
 - “native” when an advanced codec is not used
 - “h264”  (advanced SDK required)
 - “h265” (advanced SDK required)
 
-## Constraints
-### Sender Constraints
-### Receiver Constraints
-
-## Mux Flows
-
-## Metadata
+## Controllers
+### Query of Registered Nodes, Senders and Receivers
+### Discovery of Native NDI Senders
 
 
 
