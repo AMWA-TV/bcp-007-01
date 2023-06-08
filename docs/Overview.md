@@ -103,9 +103,9 @@ For NDI HX, HX2 and HX3 implementation, NMOS models NDI flows as:
 Mention Codecs and protocols here.
 ```
  [{
-        "protocols": "auto”,
-        “audio_codec": “native",  
-        “video_codec": “native”
+        "protocols": "auto",
+        "audio_codec": "native",  
+        "video_codec": "native"
 }]
 ```
 
@@ -140,9 +140,9 @@ Metadata flow may be bidirectional, i.e. one flow in each direction (e.g. PTZ ca
 #### Receiver Capabilities
 ```
  [{
-        "protocols": "auto”,
-        “audio_codec": “native",  
-        “video_codec": “native”
+        "protocols": "auto",
+        "audio_codec": "native",  
+        "video_codec": "native"
 }]
 ```
 
@@ -179,7 +179,7 @@ This will encapsulate all flavors of NDI (SHQ / HX / HX2 / HX3 …). Details to 
 "transport_params": [{
         "server_ip": "10.10.10.10",
         "server_port": 5960,
-        “source_name": "ndi-sender-unique-name",
+        "source_name": "ndi-sender-unique-name",
         "group_name": "camera1",
 
 }]
@@ -202,12 +202,12 @@ Indicate the NDI group of the source. Null indicates the default group.
 
 ```json
  "transport_params": [{
-        “interface_ip": "10.10.10.10",
-        “server_host": "10.10.10.20",
+        "interface_ip": "10.10.10.10",
+        "server_host": "10.10.10.20",
         "server_port": 5960,
-        “source_name": "ndi-sender-unique-name",
+        "source_name": "ndi-sender-unique-name",
         "group_name": "camera1",
-        “discovery_servers” : "10.20.20.20"
+        "discovery_servers" : "10.20.20.20"
     }]
 ```
 
