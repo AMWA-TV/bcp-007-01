@@ -6,11 +6,27 @@
 
 _(c) AMWA 2023, CC Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)_
 
+## About BCP-NMOS-NDI
+
+### What does it do?
+ - Enables Registration, Discovery, and Connection Management of NDI Endpoints using the AMWA IS-04 and IS-05 NMOS Specifications.
+ - Specifies the interaction of NMOS-enabled NDI nodes and non-NMOS nodes.
+
+### Why does it matter?
+- It allows NDI endpoints and gateways to integrate in an NMOS-managed control environment.
+
+### How does it work?
+- It specifies how NDI senders and receivers are defined within the scope of IS-04 and IS-05.
+- It specifies how connections can be made to non-NMOS NDI senders.
+- It defines the representation of muxed NDI flows of video, audio and metadata.
+
+
+# AMWA BCP-NMOS-NDI: NMOS with NDI
+
 ## Introduction
+NDI (Network Display Interface) is an IP transport and control technology created by Newtek, now part of VizRT. It includes definitions of encoding, transport and provides a full SDK to implement IP media transport. This document outlines how NDI devices can be managed through NMOS IS-04 and IS-05.
 
-> Provide an overview of the Specification.
-
-Familiarity with the [JT-NM Reference Architecture](https://jt-nm.org/reference-architecture/) is assumed.
+Familiarity with the [JT-NM Reference Architecture](https://jt-nm.org/reference-architecture/) and the [NDI® SDK](https://ndi.video/sdk/) are assumed.
 
 See also the [NMOS Technical Overview](https://specs.amwa.tv/nmos/main/docs/Technical_Overview.html).
 
@@ -32,7 +48,7 @@ This document depends upon the following reference documents:
 
 The NMOS terms ‘Controller’, ‘Node’, ‘Source’, ‘Flow’, ‘Sender’, ‘Receiver’ are used as defined in the [NMOS Glossary](https://specs.amwa.tv/nmos/main/docs/Glossary.html).
 
-This specification also defines the following terms.
+This specification also defines the following terms:
 
 ### Native NDI Device
 
@@ -46,9 +62,40 @@ A sender of NDI an NDI stream as defined in the NDI SDK Documentation. This shal
 
 A receiver of NDI an NDI stream as defined in the NDI SDK Documentation. This shall not be inferred to be a “receiver” as defined in the NMOS Glossary. Note that the same physical or logical apparatus may simultaneously instantiate an NMOS receiver and Native NDI Receiver.
 
+### NDI full bandwidth, NDI HX, NDI HX2, NDI HX3
+
+**NDI full bandwidth** utilizes proprietary codecs for audio and video with typical bandwidth of 125-140Mb/s per HD video flow.
+
+**NDI HX** utilizes h.264 video encoding and aac audio encoding with typical bandwidth of 8-20Mb/s per HD video flow. NDI HX is sometimes stylized **NDI|HX** in some documentation.
+
+**NDI HX2** allows the use of h.264 or h.265 long-gop video coding and aac audio encoding utilizing approximately half the bandwidth of NDI HX when h.265 encoding is utilized. NDI HX2 is sometimes stylized **NDI|HX2** in some documentation.
+
+**NDI HX3** allows the use of h.264 or h.265 short-gop coding to minimize latency with aac audio coding, utilizing approximately 80Mb/s per HD video flow. NDI HX3 is sometimes stylized **NDI|HX3** in some documentation.
+
+> This document shall use the term "NDI" when referring to all NDI variants, and specify "NDI full bandwidth", "NDI HX", "NDI HX2", or "NDI HX3" where the text applies to specific NDI variants.
+
+
+
 ## Model
 
-> Describe the model here, including use cases of NMOS NDI->NMOS NDI, NATIVE NDI->NMOS NDI. Include discovery model for NMOS and Native Senders and Receivers.
+NDI media flows utilize a variety of codecs to compress media flows. In many cases, the NDI SDK negotiates between nodes to select the codec, transport parameters, and encoding parameters used for a media flow.
+
+### NDI Full Bandwidth
+The NDI SDK, by default, automatically selects and negotiates encoding parameters between nodes. Media content enters the Native NDI Sender as raw, uncompressed media and raw, uncompressed media emerges from Native NDI Receivers. 
+
+Since the NDI SDK controls the encoding and interfaces the host application using raw media, NMOS models NDI flows as:
+- `video/raw` for video flows
+- `audio/L8`, `audio/L16`, `audio/L24` for audio flows
+- *`application/<some format>`* for metadata flows
+
+### NDI HX, NDI HX2, NDI HX3
+The NDI Advanced SDK supports compressed flows utilizing h.264, h.265, and aac codecs. In these implementations, the host application presents compressed frames of media to the Native NDI Sender and a Native NDI receiver presents compressed media frames to the host application. 
+
+For NDI HX, HX2 and HX3 implementation, NMOS models NDI flows as:
+- `video/H264`, `video/H265` for video flows
+- `audio/mpeg4-generic` for audio flows
+- *`application/<some format>`* for metadata flows
+
 
 
 ## NDI IS-04 Sources, Flows and Senders
@@ -115,11 +162,6 @@ Possible values are:
 - “native” when an advanced codec is not used
 - “h264” (advanced SDK required)
 - “h265” (advanced SDK required)
-
-
-
-
-
 
 ## NDI IS-05 Senders and Receivers
 ### Transport Type
