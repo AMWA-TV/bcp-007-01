@@ -102,6 +102,7 @@ For NDI HX, HX2 and HX3 implementation, NMOS models NDI flows as:
 ### Sender Capabilities
 
 > Need to rationalize how to specify media_type for both autio and video essence in muxed flow
+> Note that all the codec params are only valid for devices implementing the advanced SDK. Potentially all the caps/constraint_sets could be restricted to advanced SDK devices only???
 
 ```json
 "caps" : {
@@ -120,26 +121,28 @@ For NDI HX, HX2 and HX3 implementation, NMOS models NDI flows as:
        "rudp"
     ],
  "constraint_sets" : [
-  "urn:x-nmos:cap:transport:video_codec": [
-       { "enum" : [ "native" ] }, 
-       { "enum" : [ "h264" ] }, 
-       { "enum" : [ "h265" ] }
-  ],
-  "urn:x-nmos:cap:transport:video_codec_quality": [
-       { "minimum" : 50, "maximum" : 200 }
-  ],
-  "urn:x-nmos:cap:transport:video_codec_mode": [
-       { "enum" : [ "auto" ] }, 
-       { "enum" : [ "4:2:2" ] }, 
-       { "enum" : [ "4:2:0" ] }
-  ],
-  "urn:x-nmos:cap:transport:audio_codec": [
-       { "enum": [ "native" ] },
-       { "enum": [ "aac" ] }
-  ] 
+      "urn:x-nmos:cap:transport:video_codec": [
+           { "enum" : [ "native" ] }, 
+           { "enum" : [ "h264" ] }, 
+           { "enum" : [ "h265" ] }
+      ],
+      "urn:x-nmos:cap:transport:video_codec_quality": [
+           { "minimum" : 50, "maximum" : 200 }
+      ],
+      "urn:x-nmos:cap:transport:video_codec_mode": [
+           { "enum" : [ "auto" ] }, 
+           { "enum" : [ "4:2:2" ] }, 
+           { "enum" : [ "4:2:0" ] }
+      ],
+      "urn:x-nmos:cap:transport:audio_codec": [
+           { "enum": [ "native" ] },
+           { "enum": [ "aac" ] }
+      ] 
+   ]
 }
  
 ```
+
 
 
 **ndi_transport_protocol**  Indicate the NDI sub-protocol(s) to use/allow
@@ -158,6 +161,10 @@ Possible values are:
   - “native” when an advanced codec is not used
   - “h264” (advanced SDK required)
   - “h265” (advanced SDK required)
+
+> Should we explicitly mention SHQ here? The sub-flavours of SHQ seem to be inferred from the color encoding (4:2:0, 4:2:2, 4:4:4) and whather it is with or without alpha channel
+> According to [this wiki](https://wiki.multimedia.cx/index.php/SpeedHQ), NDI SDK uses SHQ2 and SHQ7 for 4:2:2 flows (with and without alpha respectively).
+> How do we model video+alpha flows?
 
 **video_codec_quality** Directs the NDI SDK to adjust the bitrate relative to its default value. 100 sets to default bitrate for the codec, 200 targets 200%, and so on. 
 
@@ -194,23 +201,24 @@ Metadata flow may be bidirectional, i.e. one flow in each direction (e.g. PTZ ca
        "rudp"
     ],
  "constraint_sets" : [
-  "urn:x-nmos:cap:transport:video_codec": [
-       { "enum" : [ "native" ] }, 
-       { "enum" : [ "h264" ] }, 
-       { "enum" : [ "h265" ] }
-  ],
-  "urn:x-nmos:cap:transport:video_codec_quality": [
-       { "minimum" : 50, "maximum" : 200 }
-  ],
-  "urn:x-nmos:cap:transport:video_codec_mode": [
-       { "enum" : [ "auto" ] }, 
-       { "enum" : [ "4:2:2" ] }, 
-       { "enum" : [ "4:2:0" ] }
-  ],
-  "urn:x-nmos:cap:transport:audio_codec": [
-       { "enum": [ "native" ] },
-       { "enum": [ "aac" ] }
-  ] 
+      "urn:x-nmos:cap:transport:video_codec": [
+           { "enum" : [ "native" ] }, 
+           { "enum" : [ "h264" ] }, 
+           { "enum" : [ "h265" ] }
+      ],
+      "urn:x-nmos:cap:transport:video_codec_quality": [
+           { "minimum" : 50, "maximum" : 200 }
+      ],
+      "urn:x-nmos:cap:transport:video_codec_mode": [
+           { "enum" : [ "auto" ] }, 
+           { "enum" : [ "4:2:2" ] }, 
+           { "enum" : [ "4:2:0" ] }
+      ],
+      "urn:x-nmos:cap:transport:audio_codec": [
+           { "enum": [ "native" ] },
+           { "enum": [ "aac" ] }
+      ]
+   ]
 }
  
 ```
@@ -309,10 +317,17 @@ Indicate the NDI group of the source, null indicates the default group
 Provides a list of servers for discovering the NDI streams when server_host is set to auto. If this parameter is set to auto the Receiver should establish for itself which discovery server it should use, based on its own internal configuration or default to mDNS discovery.
 
 
-
 ## Controllers
 ### Query of Registered Nodes, Senders and Receivers
+A controller may query registered nodes, senders and receivers from the registry. An NDI receiver must be registered in the registry in order to allow a controller to manage connections to it. 
+
+An NDI source may be registered in the registry if the NDI device implements the required IS-04 services. However, a controller may direct a receiver to connect to a Native NDI Sender if the controller has knowledge of that sender (either through NDI discovery or other means).
+
 ### Discovery of Native NDI Senders
+A controller may discover Native NDI Senders via the NDI SDK. This could allow a controller to establish connections between a Receiver device and an NDI Native Sender. 
+
+Native NDI Devices which do not implement NMOS IS-04 discovery shall have their device, node or sender resources registered in an NMOS Registry.
+
 
 
 
