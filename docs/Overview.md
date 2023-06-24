@@ -100,16 +100,49 @@ For NDI HX, HX2 and HX3 implementation, NMOS models NDI flows as:
 
 ## NDI IS-04 Sources, Flows and Senders
 ### Sender Capabilities
-Mention Codecs and protocols here.
-```
- [{
-        "protocols": "auto",
-        "audio_codec": "native",  
-        "video_codec": "native"
-}]
+
+> Need to rationalize how to specify media_type for both autio and video essence in muxed flow
+
+```json
+"caps" : {
+    "media_types" : [
+       "video/raw",
+       "video/H264",
+       "video/H265",
+       "audio/L24",
+       "audio/L16"
+    ],
+    "ndi_transport_protocol" : [
+       "auto",
+       "unicast",
+       "multicast",
+       "tcp",
+       "rudp"
+    ],
+ "constraint_sets" : [
+  "urn:x-nmos:cap:transport:video_codec": [
+       { "enum" : [ "native" ] }, 
+       { "enum" : [ "h264" ] }, 
+       { "enum" : [ "h265" ] }
+  ],
+  "urn:x-nmos:cap:transport:video_codec_quality": [
+       { "minimum" : 50, "maximum" : 200 }
+  ],
+  "urn:x-nmos:cap:transport:video_codec_mode": [
+       { "enum" : [ "auto" ] }, 
+       { "enum" : [ "4:2:2" ] }, 
+       { "enum" : [ "4:2:0" ] }
+  ],
+  "urn:x-nmos:cap:transport:audio_codec": [
+       { "enum": [ "native" ] },
+       { "enum": [ "aac" ] }
+  ] 
+}
+ 
 ```
 
-**protocols**  Indicate the NDI sub-protocol(s) to use/allow
+
+**ndi_transport_protocol**  Indicate the NDI sub-protocol(s) to use/allow
 - auto (default)
 - unicast
 - multicast
@@ -121,12 +154,17 @@ Possible values are:
 - “native” when and advanced codec is not used
 - “aac” to use the AAC codec. (advanced SDK required)
 
-**video_codec**  Indicate the advanced video codec to use. The values shall be compatible with the constraints. If not specified it defaults to “native”. (schema MUST be flexible to allow new values) .Possible values are:
-- “native” when an advanced codec is not used
-- “h264” (advanced SDK required)
-- “h265” (advanced SDK required)
+**video_codec** Indicate the advanced video codec to use. The values shall be compatible with the constraints. If not specified it defaults to “native”. (schema MUST be flexible to allow new values) .Possible values are:
+  - “native” when an advanced codec is not used
+  - “h264” (advanced SDK required)
+  - “h265” (advanced SDK required)
 
+**video_codec_quality** Directs the NDI SDK to adjust the bitrate relative to its default value. 100 sets to default bitrate for the codec, 200 targets 200%, and so on. 
 
+**video_codec_mode** Forces the NDI codec into a particular color-mode. Possible values are:
+  - "auto" (default)
+  - "4:2:2"
+  - "4:2:0"
 
 ### Metadata
 Metadata flow may be implicitly connected when video connection is made.
@@ -138,30 +176,70 @@ Metadata flow may be bidirectional, i.e. one flow in each direction (e.g. PTZ ca
 ## NDI IS-04 Receivers
 
 #### Receiver Capabilities
-```
- [{
-        "protocols": "auto",
-        "audio_codec": "native",  
-        "video_codec": "native"
-}]
+
+```json
+"caps" : {
+    "media_types" : [
+       "video/raw",
+       "video/H264",
+       "video/H265",
+       "audio/L24",
+       "audio/L16"
+    ],
+    "ndi_transport_protocol" : [
+       "auto",
+       "unicast",
+       "multicast",
+       "tcp",
+       "rudp"
+    ],
+ "constraint_sets" : [
+  "urn:x-nmos:cap:transport:video_codec": [
+       { "enum" : [ "native" ] }, 
+       { "enum" : [ "h264" ] }, 
+       { "enum" : [ "h265" ] }
+  ],
+  "urn:x-nmos:cap:transport:video_codec_quality": [
+       { "minimum" : 50, "maximum" : 200 }
+  ],
+  "urn:x-nmos:cap:transport:video_codec_mode": [
+       { "enum" : [ "auto" ] }, 
+       { "enum" : [ "4:2:2" ] }, 
+       { "enum" : [ "4:2:0" ] }
+  ],
+  "urn:x-nmos:cap:transport:audio_codec": [
+       { "enum": [ "native" ] },
+       { "enum": [ "aac" ] }
+  ] 
+}
+ 
 ```
 
-**protocols**  Indicate the NDI sub-protocol(s) to use/allow
+
+**ndi_transport_protocol**  Indicate the NDI sub-protocol(s) to use/allow
 - auto (default)
 - unicast
 - multicast
 - tcp
 - rudp
 
-**audio_codec** Indicate the advanced audio codec to use. The values shall be compatible with the constraints. If not specified it defaults to “native”. (schema MUST be flexible to allow new values)
+**audio_codec**  Indicate the advanced audio codec to use. The values shall be compatible with the constraints. If not specified it defaults to “native”. (schema MUST be flexible to allow new values)
 Possible values are:
 - “native” when and advanced codec is not used
 - “aac” to use the AAC codec. (advanced SDK required)
 
-**video_codec**  Indicate the advanced video codec to use. The values shall be compatible with the constraints. If not specified it defaults to “native”. (schema MUST be flexible to allow new values) .Possible values are:
-- “native” when an advanced codec is not used
-- “h264” (advanced SDK required)
-- “h265” (advanced SDK required)
+**video_codec** Indicate the advanced video codec to use. The values shall be compatible with the constraints. If not specified it defaults to “native”. (schema MUST be flexible to allow new values) .Possible values are:
+  - “native” when an advanced codec is not used
+  - “h264” (advanced SDK required)
+  - “h265” (advanced SDK required)
+
+**video_codec_quality** Directs the NDI SDK to adjust the bitrate relative to its default value. 100 sets to default bitrate for the codec, 200 targets 200%, and so on. 
+
+**video_codec_mode** Forces the NDI codec into a particular color-mode. Possible values are:
+  - "auto" (default)
+  - "4:2:2"
+  - "4:2:0"
+
 
 ## NDI IS-05 Senders and Receivers
 ### Transport Type
