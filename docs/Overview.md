@@ -110,11 +110,6 @@ The receiver deivce connects to a flow via the NDI SDK by passing it the Native 
 
 Additional format properties of the flow are only available after the connection has been established.
 
-
-
-
-
-
 ### NDI Full Bandwidth
 The NDI SDK, by default, automatically selects and negotiates encoding parameters between nodes. Media content enters the Native NDI Sender as raw, uncompressed media and raw, uncompressed media emerges from Native NDI Receivers. 
 
@@ -131,10 +126,49 @@ For NDI HX, HX2 and HX3 implementation, NMOS models NDI flows as:
 - `audio/mpeg4-generic` for audio flows
 - *`application/<some format>`* for metadata flows
 
+### Mux Flows
+NDI flows may contain one or more elementary flows:
+- video (may be video only or video+alpha)
+- audio
+- metadata
+If the NDI SDK supports it, there may be multiple of each format
 
+These multiplexed flows shall be modeled as `mux` format.
+
+If the Sender’s Flow is not of (format=mux and media_type=application/ndi) 
+- Then the Sender sends either video, audio or data and the Sender’s Flow format must either be video, audio or data shortcut notation which is assumed to be equivalent to having an intermediate mux Flow embedded within the Sender with only one Flow. 
+- Otherwise the Sender sends a multiplexed stream of at least two of (video, audio, data) and the Sender’s parents Flow format must be of video, audio and data formats.
+
+![MUX Sender Model](images/MUX_Sender.png)
+
+> How do we model Native NDI Senders wrt Flows / Sources??? Where do source_id, flow_id come frome?
+
+![MUX Receiver Model](images/MUX_Receiver.png)
 
 ## NDI IS-04 Sources, Flows and Senders
-### Sender Capabilities
+
+### Flows
+> Note anything unique here
+
+Video flows 
+- `components` may include "A" for alpha channel
+
+MUX flows
+- format: `urn:x-nmos:format:mux`
+- media_type: `application/ndi`
+
+### Sources
+> Note anything unique here
+
+
+### Senders
+> Note anything unique here
+
+- no `manifest_href`
+- transport: `urn:x-nmos:transport:rtp.ndi`
+- interface_bindings: should agree with NDI `adapters` property
+
+#### Sender Capabilities
 
 > Need to rationalize how to specify media_type for both autio and video essence in muxed flow
 > Note that all the codec params are only valid for devices implementing the advanced SDK. Potentially all the caps/constraint_sets could be restricted to advanced SDK devices only???
@@ -177,7 +211,11 @@ For NDI HX, HX2 and HX3 implementation, NMOS models NDI flows as:
 }
  
 ```
-
+> Are media_type caps required here?
+>
+> Any comment on other caps / constraints that are applicable???
+>
+> codec_color_mode may be too deep and left to device to manage or via IS-12???
 
 
 **ndi_transport_protocol**  Indicate the NDI sub-protocol(s) to use/allow
@@ -210,12 +248,16 @@ Possible values are:
 
 ### Metadata
 Metadata flow may be implicitly connected when video connection is made.
-Metadata flow may be bidirectional, i.e. one flow in each direction (e.g. PTZ camera control). These flows are not explicitly connected via controller.
+Metadata flow may be bidirectional, i.e. one flow in each direction (e.g. PTZ camera control). These flows are not explicitly connected via controller. 
 
-### Mux Flows
+**Metadata flows are not explicitly modeled in NMOS ????**
+
 
 
 ## NDI IS-04 Receivers
+
+### Receivers
+> Note anything unique here
 
 #### Receiver Capabilities
 
@@ -286,13 +328,17 @@ Possible values are:
 
 ## NDI IS-05 Senders and Receivers
 ### Transport Type
-NDI Flows shall utilize a new transport type in IS-05:
+NDI Flows shall utilize a new `transport_type` in IS-05:
 
  ```
  urn:x-nmos:transport:ndi
  ```
 
 This will encapsulate all flavors of NDI (SHQ / HX / HX2 / HX3 …). Details to be specified in transport_params
+
+### Sender transport_file
+
+Not used.
 
 ### Sender Transport Parameters
 
@@ -305,6 +351,21 @@ This will encapsulate all flavors of NDI (SHQ / HX / HX2 / HX3 …). Details to 
 
 }]
 ```
+
+Alternative - maybe a bit more NMOSSY:
+
+```json
+"transport_params": [{
+        "source_ip": "10.10.10.10",
+        "source_port": 5960,
+        "source_name": "ndi-sender-unique-name",
+        "group_name": "camera1",
+
+}]
+```
+
+> Do we need the ndi name here, or can it go elsewhere? Is it the flow label for instance???
+
 
 **server_ip**
 IP address hosting the NDI server (IP address of interface bound to the server). If the parameter is set to auto the Sender should establish for itself which interface it should use, based on its own internal configuration. A null value indicates that the Sender has not yet been configured.
@@ -348,8 +409,10 @@ The name of the stream as declared by the NDI sender. The stream may contain mul
 Indicate the NDI group of the source, null indicates the default group
 
 
-**discovery_servers**
+**discovery_servers ????**
 Provides a list of servers for discovering the NDI streams when server_host is set to auto. If this parameter is set to auto the Receiver should establish for itself which discovery server it should use, based on its own internal configuration or default to mDNS discovery.
+
+> Does this belong here??? It probably makes sense that a controller may wish to manipulate this, but where???
 
 
 ## Controllers
