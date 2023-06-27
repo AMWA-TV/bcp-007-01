@@ -78,7 +78,42 @@ A receiver of NDI an NDI stream as defined in the NDI SDK Documentation. This sh
 
 ## Model
 
-NDI media flows utilize a variety of codecs to compress media flows. In many cases, the NDI SDK negotiates between nodes to select the codec, transport parameters, and encoding parameters used for a media flow.
+NDI media flows utilize a variety of codecs to compress media flows. In many cases, the NDI SDK negotiates between nodes to select the codec, transport parameters, and encoding parameters used for a media flow. A Native NDI Receiver does not learn about the encoding and transport parameters of an NDI flow until a connection is established. 
+
+### Native NDI Sender Workflow
+The sender device creates a flow via the NDI SDK, providing it with the following:
+- Raster size
+- Color encoding format (FourCC Type)
+- Frame rate
+-  Aspect Ratio
+-  Progressive / interlace
+-  Audio sample rate
+-  Number of audio channels
+-  Stream name
+-  NDI groups
+
+The NDI SDK advertises the stream on the local network, exposing the following:
+- Stream name
+- NDI groups
+- Host URL
+ 
+### Native NDI Receiver Workflow
+The Receiver may discover NDI flows on the local network via discovery mechanisms provided by the NDI SDK. This process will provide the following information for each discoverd flow:
+- Stream name
+- NDI groups
+- Host URL
+
+The receiver deivce connects to a flow via the NDI SDK by passing it the Native NDI source infomration (as presented by the NDI discovery API), and additionally specifying:
+- Receiver name (currently not used)
+- color format. The SDK will convert the incoming flow to the desired color format fo the Native NDI Receiver.
+- bandwidth: The Native NDI receiver may request either the full bandwidth stream or a lower-bandwith (preview) stream. If a lower-bandwidth stream is requested, the SDK will signal the Native NDI Sender to send the lower bandwidth flow.
+
+Additional format properties of the flow are only available after the connection has been established.
+
+
+
+
+
 
 ### NDI Full Bandwidth
 The NDI SDK, by default, automatically selects and negotiates encoding parameters between nodes. Media content enters the Native NDI Sender as raw, uncompressed media and raw, uncompressed media emerges from Native NDI Receivers. 
