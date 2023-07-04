@@ -74,13 +74,31 @@ A receiver of NDI an NDI stream as defined in the NDI SDK Documentation. This sh
 
 > This document shall use the term "NDI" when referring to all NDI variants, and specify "NDI full bandwidth", "NDI HX", "NDI HX2", or "NDI HX3" where the text applies to specific NDI variants.
 
+### NDI SDK
 
+The NDI Software Development Kit (SDK) is offered in two variants. The base version shall be referred to as **NDI Standard SDK**, The Advanced SDK shall be referred to as **NDI Advanced SDK**. References to **NDI SDK** shall be interpreted to apply to both the **NDI Standard SDK** and **NDI Advanced SDK**. 
 
 ## Model
+
+![NMOS-NDI Model](images/NDI_Model.png)
+
+NDI Native Devices, NDI Native Receivers and NDI Native Senders may be represeneted by NMOS Device/Node, Receivers and Senders repectively. Provision is included to allow an NMOS-enabled NDI receiever to connect to media flows from NMOS-enabled NDI devices or Native NDI Senders which are not NMOS-enabled.
+
+
+- NDI shall always be expressed as muxed flows
+- Connections via IS-05 shall require NMOS-enabled receiver nodes.
+- Connections via IS-05 should support NMOS-enabled sender nodes.
+- Connections via IS-05 may support Native NDI Senders on devices which do not implement NMOS.
+
+
+### Native NDI Model
+
+> Perhaps remove this section???  Keep only if it is required for clarity of NMOS interaction
 
 NDI media flows utilize a variety of codecs to compress media flows. In many cases, the NDI SDK negotiates between nodes to select the codec, transport parameters, and encoding parameters used for a media flow. A Native NDI Receiver does not learn about the encoding and transport parameters of an NDI flow until a connection is established. 
 
 ### Native NDI Sender Workflow
+
 The sender device creates a flow via the NDI SDK, providing it with the following:
 - Raster size
 - Color encoding format (FourCC Type)
@@ -115,136 +133,91 @@ The NDI SDK, by default, automatically selects and negotiates encoding parameter
 
 Since the NDI SDK controls the encoding and interfaces the host application using raw media, NMOS models NDI flows as:
 - `video/raw` for video flows
-- `audio/L8`, `audio/L16`, `audio/L24` for audio flows
-- *`application/<some format>`* for metadata flows
+- `audio/pcm` for audio flows
+
 
 ### NDI HX, NDI HX2, NDI HX3
 The NDI Advanced SDK supports compressed flows utilizing h.264, h.265, and aac codecs. In these implementations, the host application presents compressed frames of media to the Native NDI Sender and a Native NDI receiver presents compressed media frames to the host application. 
 
 For NDI HX, HX2 and HX3 implementation, NMOS models NDI flows as:
 - `video/H264`, `video/H265` for video flows
-- `audio/mpeg4-generic` for audio flows
-- *`application/<some format>`* for metadata flows
+- `audio/mpeg4-generic` for audio flows 
+
+
+### NDI Metadata
+Metadata connections may be implicitly established by the NDI SDK when video connections are established. In some cases, bi-directional metadata connections may be established by the NDI SDK between the Native NDI Sender and Native NDI Receiver. NDI Metadata will not be represeneted explicitly through NMOS. 
 
 ### Mux Flows
 NDI flows may contain one or more elementary flows:
 - video (may be video only or video+alpha)
 - audio
 - metadata
-If the NDI SDK supports it, there may be multiple of each format
+
+The current NDI SDK limits to a maximum of one each video, audio and metadata, but the implementation should be extensible. If future versions of the NDI SDK supports it, mux flows should support multiple of each format.
 
 These multiplexed flows shall be modeled as `mux` format.
 
-If the Sender’s Flow is not of (format=mux and media_type=application/ndi) 
-- Then the Sender sends either video, audio or data and the Sender’s Flow format must either be video, audio or data shortcut notation which is assumed to be equivalent to having an intermediate mux Flow embedded within the Sender with only one Flow. 
-- Otherwise the Sender sends a multiplexed stream of at least two of (video, audio, data) and the Sender’s parents Flow format must be of video, audio and data formats.
+Metadata flows are not explicitly modeled in NMOS and shall be considered implicit with an audio or video flow.
+
+The NDI muxed flow shall have parents of video or audio flows. 
 
 ![MUX Sender Model](images/MUX_Sender.png)
 
+![MUX Receiver Model](images/MUX_Receiver.png)
+
 > How do we model Native NDI Senders wrt Flows / Sources??? Where do source_id, flow_id come frome?
 
-![MUX Receiver Model](images/MUX_Receiver.png)
+> Perhaps we should include json examples of what MUX flow / source / receiver constructs look like
 
 ## NDI IS-04 Sources, Flows and Senders
 
 ### Flows
 > Note anything unique here
 
-Video flows 
-- `components` may include "A" for alpha channel
+**Video flows** 
+NMOS Senders shall map the employed `NDIlib_FourCC_video_type` to the corresponding properties in the video flow definition. 
+> NDI supports video+alpha video flows. These shall be modeled as a single video flow, including a channel labelled "A" in the `components` parameters.
 
-MUX flows
+
+**Audio flows**
+
+NDI currently only supports 32-bit floating point PCM audio.
+````json
+        "media_type": "audio/pcm",
+        "encoding" : "float",
+        "bit_depth" : 32
+````
+
+**Metadata flows**
+
+Metadata is abstracted and does not appear as a discrete flow behind the mux.
+
+**MUX flows**
+
+NDI are always mux flows. Will need to make sure we have a way to specify capabilities on mux sender/receiver 
+The NDI muxed flow shall have parents of video or audio flows. 
+
 - format: `urn:x-nmos:format:mux`
 - media_type: `application/ndi`
 
 ### Sources
 > Note anything unique here
+>
+> Missing reciever_id attribute
 
 
 ### Senders
 > Note anything unique here
-
-- no `manifest_href`
-- transport: `urn:x-nmos:transport:rtp.ndi`
-- interface_bindings: should agree with NDI `adapters` property
-
-#### Sender Capabilities
-
-> Need to rationalize how to specify media_type for both autio and video essence in muxed flow
-> Note that all the codec params are only valid for devices implementing the advanced SDK. Potentially all the caps/constraint_sets could be restricted to advanced SDK devices only???
-
-```json
-"caps" : {
-    "media_types" : [
-       "video/raw",
-       "video/H264",
-       "video/H265",
-       "audio/L24",
-       "audio/L16"
-    ],
-    "ndi_transport_protocol" : [
-       "auto",
-       "unicast",
-       "multicast",
-       "tcp",
-       "rudp"
-    ],
- "constraint_sets" : [
-      "urn:x-nmos:cap:transport:video_codec": [
-           { "enum" : [ "native" ] }, 
-           { "enum" : [ "h264" ] }, 
-           { "enum" : [ "h265" ] }
-      ],
-      "urn:x-nmos:cap:transport:video_codec_quality": [
-           { "minimum" : 50, "maximum" : 200 }
-      ],
-      "urn:x-nmos:cap:transport:video_codec_mode": [
-           { "enum" : [ "auto" ] }, 
-           { "enum" : [ "4:2:2" ] }, 
-           { "enum" : [ "4:2:0" ] }
-      ],
-      "urn:x-nmos:cap:transport:audio_codec": [
-           { "enum": [ "native" ] },
-           { "enum": [ "aac" ] }
-      ] 
-   ]
-}
- 
-```
-> Are media_type caps required here?
 >
-> Any comment on other caps / constraints that are applicable???
->
-> codec_color_mode may be too deep and left to device to manage or via IS-12???
+> Talk about Mux flow sender???
 
+NDI Senders do not utilize SDP to describe the flow; therefore senders shall not specify the  `manifest_href` parameter.
 
-**ndi_transport_protocol**  Indicate the NDI sub-protocol(s) to use/allow
-- auto (default)
-- unicast
-- multicast
-- tcp
-- rudp
+For NDI, the transport shall be specified:
 
-**audio_codec**  Indicate the advanced audio codec to use. The values shall be compatible with the constraints. If not specified it defaults to “native”. (schema MUST be flexible to allow new values)
-Possible values are:
-- “native” when and advanced codec is not used
-- “aac” to use the AAC codec. (advanced SDK required)
+        transport: `urn:x-nmos:transport:ndi`
 
-**video_codec** Indicate the advanced video codec to use. The values shall be compatible with the constraints. If not specified it defaults to “native”. (schema MUST be flexible to allow new values) .Possible values are:
-  - “native” when an advanced codec is not used
-  - “h264” (advanced SDK required)
-  - “h265” (advanced SDK required)
-
-> Should we explicitly mention SHQ here? The sub-flavours of SHQ seem to be inferred from the color encoding (4:2:0, 4:2:2, 4:4:4) and whather it is with or without alpha channel
-> According to [this wiki](https://wiki.multimedia.cx/index.php/SpeedHQ), NDI SDK uses SHQ2 and SHQ7 for 4:2:2 flows (with and without alpha respectively).
-> How do we model video+alpha flows?
-
-**video_codec_quality** Directs the NDI SDK to adjust the bitrate relative to its default value. 100 sets to default bitrate for the codec, 200 targets 200%, and so on. 
-
-**video_codec_mode** Forces the NDI codec into a particular color-mode. Possible values are:
-  - "auto" (default)
-  - "4:2:2"
-  - "4:2:0"
+Additional parameters and properties that may be specified by a device via the NDI SDK are not included in the NMOS NDI model. Those paramaters are considered device-specific controls. 
 
 ### Metadata
 Metadata flow may be implicitly connected when video connection is made.
@@ -259,74 +232,25 @@ Metadata flow may be bidirectional, i.e. one flow in each direction (e.g. PTZ ca
 ### Receivers
 > Note anything unique here
 
+
 #### Receiver Capabilities
+
+For the muxed flow, the mux receiver must specify:
 
 ```json
 "caps" : {
     "media_types" : [
-       "video/raw",
-       "video/H264",
-       "video/H265",
-       "audio/L24",
-       "audio/L16"
-    ],
-    "ndi_transport_protocol" : [
-       "auto",
-       "unicast",
-       "multicast",
-       "tcp",
-       "rudp"
-    ],
- "constraint_sets" : [
-      "urn:x-nmos:cap:transport:video_codec": [
-           { "enum" : [ "native" ] }, 
-           { "enum" : [ "h264" ] }, 
-           { "enum" : [ "h265" ] }
-      ],
-      "urn:x-nmos:cap:transport:video_codec_quality": [
-           { "minimum" : 50, "maximum" : 200 }
-      ],
-      "urn:x-nmos:cap:transport:video_codec_mode": [
-           { "enum" : [ "auto" ] }, 
-           { "enum" : [ "4:2:2" ] }, 
-           { "enum" : [ "4:2:0" ] }
-      ],
-      "urn:x-nmos:cap:transport:audio_codec": [
-           { "enum": [ "native" ] },
-           { "enum": [ "aac" ] }
-      ]
-   ]
+       "application/ndi"
+    ]
 }
- 
 ```
 
-
-**ndi_transport_protocol**  Indicate the NDI sub-protocol(s) to use/allow
-- auto (default)
-- unicast
-- multicast
-- tcp
-- rudp
-
-**audio_codec**  Indicate the advanced audio codec to use. The values shall be compatible with the constraints. If not specified it defaults to “native”. (schema MUST be flexible to allow new values)
-Possible values are:
-- “native” when and advanced codec is not used
-- “aac” to use the AAC codec. (advanced SDK required)
-
-**video_codec** Indicate the advanced video codec to use. The values shall be compatible with the constraints. If not specified it defaults to “native”. (schema MUST be flexible to allow new values) .Possible values are:
-  - “native” when an advanced codec is not used
-  - “h264” (advanced SDK required)
-  - “h265” (advanced SDK required)
-
-**video_codec_quality** Directs the NDI SDK to adjust the bitrate relative to its default value. 100 sets to default bitrate for the codec, 200 targets 200%, and so on. 
-
-**video_codec_mode** Forces the NDI codec into a particular color-mode. Possible values are:
-  - "auto" (default)
-  - "4:2:2"
-  - "4:2:0"
+> Need to rationalize how to specify media_type for both autio and video essence in muxed flow.
 
 
 ## NDI IS-05 Senders and Receivers
+
+
 ### Transport Type
 NDI Flows shall utilize a new `transport_type` in IS-05:
 
@@ -334,7 +258,9 @@ NDI Flows shall utilize a new `transport_type` in IS-05:
  urn:x-nmos:transport:ndi
  ```
 
-This will encapsulate all flavors of NDI (SHQ / HX / HX2 / HX3 …). Details to be specified in transport_params
+This transport_type signifies a muxed NDI flow delivered by the NDI SDK. 
+
+
 
 ### Sender transport_file
 
@@ -344,33 +270,20 @@ Not used.
 
 ```json
 "transport_params": [{
-        "server_ip": "10.10.10.10",
-        "server_port": 5960,
-        "source_name": "ndi-sender-unique-name",
-        "group_name": "camera1",
-
-}]
-```
-
-Alternative - maybe a bit more NMOSSY:
-
-```json
-"transport_params": [{
         "source_ip": "10.10.10.10",
         "source_port": 5960,
         "source_name": "ndi-sender-unique-name",
-        "group_name": "camera1",
+        "group_name": "camera1"
 
 }]
 ```
 
-> Do we need the ndi name here, or can it go elsewhere? Is it the flow label for instance???
 
 
-**server_ip**
+**source_ip**
 IP address hosting the NDI server (IP address of interface bound to the server). If the parameter is set to auto the Sender should establish for itself which interface it should use, based on its own internal configuration. A null value indicates that the Sender has not yet been configured.
 
-**server_port**
+**source_port**
 Port for the NDI server. If the parameter is set to auto the Sender should establish for itself which port it should use, based on its own internal configuration.
 
 **source_name**
@@ -378,6 +291,8 @@ The name of the stream as declared by the NDI Sender. The stream may contains mu
 
 **group_name**
 Indicate the NDI group of the source. Null indicates the default group.
+
+> Although the NDI Advanced SDK does provide provisions for NDI Native Devices to specify additional transport parameters, they are part of the NMOS NDI model. These parameters and properties are considered device-specific.
 
 
 ### Receiver Parameters
@@ -388,16 +303,16 @@ Indicate the NDI group of the source. Null indicates the default group.
         "server_host": "10.10.10.20",
         "server_port": 5960,
         "source_name": "ndi-sender-unique-name",
-        "group_name": "camera1",
-        "discovery_servers" : "10.20.20.20"
+        "group_name": "camera1"
     }]
+
 ```
 
 **interface_ip**
 IP address of the network interface the receiver should use.
 
 **server_host**
-Hostname or IP hosting the NDI server. If the parameter is set to “auto” the Receiver should establish for itself which server it should use, based on a discovery mechanism or its own internal configuration. A null value indicates that the Receiver has not yet been configured.
+Hostname or IP hosting the NDI server. If the parameter is set to “auto” the Receiver should establish for itself which server it should use, based on a discovery mechanism or its own internal configuration. A null value indicates that the Receiver has not yet been configured. may be IP address or hostname URL.
 
 **server_port**
 Port for NDI server. If the parameter is set to “auto” the Receiver should establish for itself which port it should use, based on a discovery mechanism or its own internal configuration.
