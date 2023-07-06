@@ -280,12 +280,6 @@ The name of the stream as declared by the NDI sender. The stream may contain mul
 Indicate the NDI group of the source, null indicates the default group
 
 
-**discovery_servers ????**
-Provides a list of servers for discovering the NDI streams when server_host is set to auto. If this parameter is set to auto the Receiver should establish for itself which discovery server it should use, based on its own internal configuration or default to mDNS discovery.
-
-> Does this belong here??? It probably makes sense that a controller may wish to manipulate this, but where???
-
-
 ## Controllers
 ### Query of Registered Nodes, Senders and Receivers
 A controller may query registered nodes, senders and receivers from the registry. An NDI receiver must be registered in the registry in order to allow a controller to manage connections to it. 
