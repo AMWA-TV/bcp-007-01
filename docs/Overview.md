@@ -149,9 +149,9 @@ Audio flow `media_type` shall be defined by the encoding of the source audio and
 Metadata is abstracted and does not appear as a discrete flow behind the mux.
 
 ### Sources
->
+
 > Nothing special to state here. Probably delete this section.
->]
+
 
 ### Senders
 
