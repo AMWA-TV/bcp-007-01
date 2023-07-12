@@ -8,13 +8,16 @@ This repository holds the source for this Specification, part of the family of [
 <!-- INTRO-START -->
 
 ### What does it do?
- - Enables Registration, Discovery, and Connection Management of NDI Endpoints using the AMWA IS-04 and IS-05 NMOS Specifications.
- - Specifies the interaction of NMOS-enabled NDI nodes and non-NMOS NDI nodes.
+
+- Enables Registration, Discovery, and Connection Management of NDI Endpoints using the AMWA IS-04 and IS-05 NMOS Specifications.
+- Specifies the interaction of NMOS-enabled NDI nodes and non-NMOS NDI nodes.
 
 ### Why does it matter?
+
 - It allows NDI endpoints and gateways to integrate in an NMOS-managed control environment.
 
 ### How does it work?
+
 - It specifies how NDI senders and receivers are defined within the scope of IS-04 and IS-05.
 - It specifies how connections can be made to non-NMOS NDI senders.
 - It defines the representation of muxed NDI flows of video, audio and metadata.
