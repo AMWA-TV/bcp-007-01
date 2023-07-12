@@ -1,4 +1,4 @@
-# AMWA BCP-NMOS-NDI: NMOS With NDI: Overview
+# AMWA BCP-NMOS-NDI: NMOS With NDI
 {:.no_toc}
 
 - A markdown unordered list which will be replaced with the ToC, excluding the "Contents header" from above
@@ -6,22 +6,6 @@
 
 _(c) AMWA 2023, CC Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)_
 
-## About BCP-NMOS-NDI
-
-### What does it do?
- - Enables Registration, Discovery, and Connection Management of NDI Endpoints using the AMWA IS-04 and IS-05 NMOS Specifications.
- - Specifies the interaction of NMOS-enabled NDI nodes and non-NMOS nodes.
-
-### Why does it matter?
-- It allows NDI endpoints and gateways to integrate in an NMOS-managed control environment.
-
-### How does it work?
-- It specifies how NDI senders and receivers are defined within the scope of IS-04 and IS-05.
-- It specifies how connections can be made to non-NMOS NDI senders.
-- It defines the representation of muxed NDI flows of video, audio and metadata.
-
-
-# AMWA BCP-NMOS-NDI: NMOS with NDI
 
 ## Introduction
 NDI (Network Display Interface) is an IP transport and control technology created by Newtek, a division of VizRT. It includes definitions of encoding, transport and provides a full SDK to implement IP media transport. This document outlines how NDI devices can be managed through NMOS IS-04 and IS-05.
@@ -80,7 +64,8 @@ NDI High Efficiency profiles, named **NDI HX**, **NDI HX2**, and **NDI HX3** uti
 
 **NDI HX3** utilizes H.264 or HEVC short-gop coding to minimize latency with AAC audio coding, utilizing approximately 80Mb/s per HD video flow. NDI HX3 is sometimes stylized **NDI|HX3** in some documentation.
 
-> This document shall use the term "NDI" when referring to all NDI variants, and specify "NDI full bandwidth", "NDI HX", "NDI HX2", or "NDI HX3" where the text applies to specific NDI variants.
+### NDI 
+This document shall use the term "NDI" when referring to all NDI variants, and specify "NDI full bandwidth", "NDI HX", "NDI HX2", or "NDI HX3" where the text applies to specific NDI variants.
 
 ## Native NDI Model
 
@@ -114,7 +99,7 @@ A controller which supports NDI connection management via IS-05 shall support co
 
 Senders and Receivers of NDI flows shall be always represented as a mux, as NDI connections may contain multiple essences including video, audio and metadata. 
 
-### Mux Flows
+### Multiplexed Flow Model
 NDI flows may contain one or more elementary flows:
 - video (may be video only or video+alpha)
 - audio
@@ -156,18 +141,13 @@ Audio flow `media_type` shall be defined by the encoding of the source audio and
 
 Metadata is abstracted and does not appear as a discrete flow behind the mux.
 
-- format: `urn:x-nmos:format:mux`
-- media_type: `application/ndi`
 
 ### Sources
-> Note anything unique here
->
-> Missing reciever_id attribute
+> Nothing special to state here. Probably delete this section.
+>]
 
 
 ### Senders
-
-> Talk about Mux flow sender???
 
 NDI Senders do not utilize SDP to describe the flow; therefore senders shall not specify the  `manifest_href` parameter.
 
@@ -175,7 +155,7 @@ For NDI, the transport shall be specified:
 
         transport: `urn:x-nmos:transport:ndi`
 
-Additional parameters and properties that may be specified by a device via the NDI SDK are not included in the NMOS NDI model. Those paramaters are considered device-specific controls. 
+Additional parameters and properties that may be specified by a device via the NDI SDK are not be included in the NMOS NDI model. Those paramaters are considered device-specific controls. 
 
 ### Metadata
 
@@ -201,7 +181,7 @@ For the muxed flow, the mux receiver must specify:
 }
 ```
 
-> Need to rationalize how to specify media_type for both autio and video essence in muxed flow.
+> Additional capabilities for sub-flows may need to be expressed. This relies on additional work that has yet to be done.
 
 
 ## NDI IS-05 Senders and Receivers
@@ -248,15 +228,15 @@ The name of the stream as declared by the NDI Sender. The stream may contains mu
 **group_name**
 Indicate the NDI group of the source. Null indicates the default group.
 
-> Although the NDI Advanced SDK does provide provisions for NDI Native Devices to specify additional transport parameters, they are part of the NMOS NDI model. These parameters and properties are considered device-specific.
+Although the NDI Advanced SDK does provide provisions for NDI Native Devices to specify additional transport parameters, they are part of the NMOS NDI model. These parameters and properties shall be considered device-specific.
 
 
 ### Receiver Parameters
 
 ```json
  "transport_params": [{
-        "interface_ip": "10.10.10.10",
-        "server_host": "10.10.10.20",
+        "interface_ip": "10.10.10.20",
+        "server_host": "10.10.10.10",
         "server_port": 5960,
         "source_name": "ndi-sender-unique-name",
         "group_name": "camera1"
