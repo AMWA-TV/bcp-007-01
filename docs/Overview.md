@@ -140,6 +140,7 @@ Native NDI Senders do not appear in an NMOS Registry.  They MAY be discovered th
 
 ---
 
+
 ### Multiplexed Flow Model
 
 Senders and Receivers of NDI flows SHALL be always represented as a mux, as NDI connections MAY contain multiple essences including video, audio and metadata.
