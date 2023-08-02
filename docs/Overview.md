@@ -116,7 +116,7 @@ Metadata connections MAY be implicitly established by the NDI SDK when video con
 
 ## NMOS-NDI Model
 
-![NMOS-NDI Model](images/NDI_Model.png)
+![NMOS-NDI Model](images/NMOS-NDI-Ecosystem-drawio.svg)
 
 NDI Native Devices, NDI Native Receivers and NDI Native Senders MAY be represeneted by NMOS Devices/Nodes, Receivers and Senders repectively.
 
