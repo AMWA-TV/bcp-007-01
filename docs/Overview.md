@@ -44,9 +44,15 @@ This specification also defines the following terms:
 
 The NDI Software Development Kit (SDK) is offered in two variants. The base version SHALL be referred to as **NDI Standard SDK**, The Advanced SDK SHALL be referred to as **NDI Advanced SDK**. References to **NDI SDK** SHALL be interpreted to apply to both the **NDI Standard SDK** and **NDI Advanced SDK**.
 
+> Describe what we mean by "Native" in the context of IS-05 Non-NMOS devices
+> Define Non-NMOS Device / Sender / Receiver -> Native Device/Sender/Receiver which doesnt implement NMOS.
+
 ### Native NDI Device
 
 A “device” as defined in the NDI SDK. This SHALL NOT be inferred to be a “Device” as defined in the NMOS Glossary. Note that the same physical or logical apparatus MAY simultaneously act as an NMOS Device and a Native NDI Device.
+
+### Non-NMOS NDI Device
+A Native NDI Device which does not support the NMOS specifications.
 
 ### NDI Stream
 
@@ -59,6 +65,9 @@ A "sender" of an NDI stream as defined in the NDI SDK. This SHALL NOT be inferre
 ### Native NDI Receiver
 
 A "receiver" of an NDI stream as defined in the NDI SDK. This SHALL NOT be inferred to be a “Receiver” as defined in the NMOS Glossary. Note that the same physical or logical apparatus MAY simultaneously act as an NMOS Receiver and a Native NDI Receiver.
+
+### NDI Device
+A Native NDI NDI Device which implements IS-04 and allows registration in a Registry
 
 ### NDI Sender
 
@@ -104,11 +113,11 @@ Since the NDI SDK controls the encoding and interfaces, NMOS flows SHALL be repr
 
 The NDI Advanced SDK supports compressed NDI Streams utilizing H.264, H.265, and AAC codecs. Media content enters the Native NDI Sender as compressed media and compressed media emerges from Native NDI Receivers.
 
-For NDI HX, HX2 and HX3 implementation, NMOS Flows sha be represented as:
+For NDI HX, HX2 and HX3 implementation, NMOS Flows SHALL be represented as:
 
 - `media_type` of `video/H264`, `video/H265` for video flows
 - `media_type` of `audio/mpeg4-generic` for audio flows utilizing the AAC codec.
-- `media_type` for audio flows utilizing the Opus codec SHALL match the encoding of the audio source as these are interfaced as raw, decompressed audio to the NDI SDK.
+- `media_type` of `audio/opus` for audio flows utilizing the Opus codec.
 
 ### NDI Metadata
 
@@ -116,44 +125,82 @@ Metadata connections MAY be implicitly established by the NDI SDK when video con
 
 ## NMOS-NDI Model
 
-![NMOS-NDI Model](images/NMOS-NDI-Ecosystem-drawio.svg)
-
-NDI Native Devices, NDI Native Receivers and NDI Native Senders MAY be represeneted by NMOS Devices/Nodes, Receivers and Senders repectively.
+Native NDI Devices, Native NDI Receivers and Native NDI Senders MAY be represeneted by NMOS Devices/Nodes, Receivers and Senders repectively.
 
 A controller which supports NDI connection management via IS-05 SHOULD support connection of NDI Receivers to NDI Senders. This controller MAY also support connection of NDI Receivers to Native NDI senders, however it SHALL determine its list of available Native NDI Senders through its own means. 
 
+NDI Devices SHOULD NOT preclude connections established with Native NDI devices via the NDI SDK.
+
+If an NDI Stream is connected to an NDI Receiver outside of IS-05, the Receiver MUST update its `active` status to the Non-NMOS device.
+
 Native NDI Senders do not appear in an NMOS Registry.  They MAY be discovered through the NDI discovery mechanism through the NDI SDK. 
 
+### Use Case Scenarios
 
----
+![NMOS-NDI Model](images/NMOS-NDI-Ecosystem-drawio.svg)
 
---- 
+The following use cases refer to the NMOS-NDI model diagram above.
 
----
+#### Use Case 1: Native NDI Sender to NDI Receiver - IS-05 Connection
 
-> Review ended here. 2023-Jul-26
-> Check on use of term "flow" / "Flow"
+![NMOS-NDI Model](images/NMOS-NDI-UseCase1-drawio.svg)
 
----
+- Controller is informed of sender (device W) by its own means; this could be via NDI discovery.
+- Controller is informed of receiver (device A) through IS-04 
+- Controller initiates connection to receiver (device A) from sender (device W) via IS-05
+- NDI Receiver (device A) reports its status as outlined in IS-05.
 
---- 
+#### Use Case 2: Native NDI Sender to NDI Receiver - Non-NMOS Connection
 
----
+![NMOS-NDI Model](images/NMOS-NDI-UseCase2-drawio.svg)
+
+- NDI Receiver (device B) is informed of Native NDI Sender (device X) by its own means; this could be via NDI discovery.
+- NDI Receiver (device B) initiates connection to Native NDI Sender (device X) directly via NDI SDK.
+- NDI Receiver updates its IS-05 `active` state, setting the `sender_id` to `null`
+- The controller does not initiate the connection, but SHOULD be informed of the receiver (device B) status via IS-05
+
+#### Use Case 3: NDI Sender to Native NDI Receiver - Non-NMOS Connection
+
+![NMOS-NDI Model](images/NMOS-NDI-UseCase3-drawio.svg)
+
+- Native NDI Receiver (device X) is informed of NDI Sender (device B) by its own means; this could be via NDI discovery.
+- Native NDI Receiver (device X) initiates connection to NDI Sender (device B) directly via NDI SDK.
+- The controller does not initiate the connection.
+
+#### Use Case 4: NDI Sender to NDI Receiver - IS-05 Connection
+
+![NMOS-NDI Model](images/NMOS-NDI-UseCase4-drawio.svg)
+
+- Controller is informed of sender (device C) through IS-04.
+- Controller is informed of receiver (device D) through IS-04. 
+- Controller initiates connection to receiver (device D) from sender (device C) via IS-05
+- NDI Sender (device C) and NDI Receiver (device D)  report their status as outlined in IS-05.
+
+#### Use Case 5: Native NDI Sender to Native NDI Receiver - Non-NMOS Connection
+
+![NMOS-NDI Model](images/NMOS-NDI-UseCase5-drawio.svg)
+
+- This scenario exists outside the realm of NMOS. The controller may not be aware of these devices, and does not initiate any connection between them.
+- Native NDI Receiver (device Z) and Native NDI Sender (device Y) discover  through their own means. this could be via NDI discovery.
+- Connection from Native NDI Sender (device Y) to Native NDI Receiver (device Z) is performed by the NDI SDK.
+
+#### Use Case 6: NDI Sender to NDI Receiver - Non-NMOS Connection
+
+![NMOS-NDI Model](images/NMOS-NDI-UseCase6-drawio.svg)
+
+- In this scenario, both sender (device E) and receiver (device F) are NMOS devices, but connection is established outside of IS-05. 
+- NDI Receiver (device E) and NDI Sender (device F) discover  through their own means. this could be via NDI discovery.
+- Connection from NDI Sender (device E) to NDI Receiver (device F) is performed by the NDI SDK.
+- NDI Receiver SHALL update its IS-05 `active` state, setting the `sender_id` to `null`
 
 
 ### Multiplexed Flow Model
 
-Senders and Receivers of NDI flows SHALL be always represented as a mux, as NDI connections MAY contain multiple essences including video, audio and metadata.
+Senders and Receivers of NDI Streams SHALL be always represented as a mux, as NDI connections MAY contain multiple essences including video, audio and metadata.
 
-NDI flows MAY contain one or more elementary flows:
+The current NDI SDK limits to a maximum of one each video, audio and metadata, but this specification supports future SDK versions which support multiple audio, video or metadata flows.
 
-- video (MAY be video only or video+alpha)
-- audio
-- metadata
-
-The current NDI SDK limits to a maximum of one each video, audio and metadata, but the implementation SHOULD be extensible. If future versions of the NDI SDK supports it, mux flows SHOULD support multiple of each format.
-
-These multiplexed flows SHALL be modeled as `mux` format.
+These multiplexed flows MUST be modeled as `mux` format.
 
 Metadata flows are not explicitly modeled in NMOS and SHALL be considered implicit with an audio or video flow.
 
@@ -164,6 +211,22 @@ The NDI muxed flow SHALL have parents of video or audio flows.
 ![MUX Receiver Model](images/MUX_Receiver.png)
 
 > Perhaps we SHOULD include json examples of what MUX flow / source / receiver constructs look like
+
+
+
+---
+
+--- 
+
+---
+
+> Review ended here. 2023-Aug-09
+
+---
+
+--- 
+
+---
 
 ## NDI IS-04 Sources, Flows and Senders
 
@@ -226,18 +289,19 @@ For the muxed flow, the mux receiver must specify:
 ```
 
 > Additional capabilities for sub-flows MAY need to be expressed. This relies on additional work that has yet to be done.
+> Codecs for audio and video will need to be expressed
 
 ## NDI IS-05 Senders and Receivers
 
 ### Transport Type
 
-NDI Flows SHALL utilize a new `transport_type` in IS-05:
+NDI Flows SHALL utilize a new `transport` in IS-05:
 
  ```
  urn:x-nmos:transport:ndi
  ```
 
-This transport_type signifies a muxed NDI flow delivered by the NDI SDK.
+This `transport` signifies a muxed NDI flow delivered by the NDI SDK.
 
 ### Sender transport_file
 
@@ -301,12 +365,13 @@ Indicate the NDI group of the source, null indicates the default group
 
 ### Query of Registered Nodes, Senders and Receivers
 
-A controller MAY query registered nodes, senders and receivers from the registry. An NDI receiver must be registered in the registry in order to allow a controller to manage connections to it.
+A controller MAY query registered Nodes, NDI Senders and NDI Receivers from the registry. An NDI Receiver MUST be registered in the registry in order to allow a controller to manage connections to it through IS-05.
+
 
 An NDI source MAY be registered in the registry if the NDI device implements the required IS-04 services. However, a controller MAY direct a receiver to connect to a Native NDI Sender if the controller has knowledge of that sender (either through NDI discovery or other means).
 
 ### Discovery of Native NDI Senders
 
-A controller MAY discover Native NDI Senders via the NDI SDK. This could allow a controller to establish connections between a Receiver device and an NDI Native Sender.
+A controller MAY discover Native NDI Senders via the NDI SDK. This could allow a controller to establish connections between an NDI Receiver and an NDI Native Sender.
 
 Native NDI Devices which do not implement NMOS IS-04 SHALL NOT be registered in an NMOS Registry.

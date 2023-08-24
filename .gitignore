@@ -2,3 +2,10 @@
 *.swp
 *~
 .DS_Store
+docs/images/.$NMOS-NDI-Ecosystem-drawio.svg.dtmp
+docs/images/.$NMOS-NDI-Ecosystem-drawio.svg.bkp
+docs/images/.$NMOS-NDI-UseCase1-drawio.svg.bkp
+docs/images/.$NMOS-NDI-UseCase2-drawio.svg.bkp
+.gitignore
+docs/images/NMOS-NDI-UseCase6.drawio
+docs/images/.$NMOS-NDI-UseCase3-drawio.svg.bkp
