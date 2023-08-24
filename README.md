@@ -1,4 +1,4 @@
-# \[Work In Progress\] AMWA NMOS With NDI
+# \[Work In Progress\] BCP-007-01: NMOS With NDI
 
 [![Lint Status](https://github.com/AMWA-TV/bcp-nmos-ndi/workflows/Lint/badge.svg)](https://github.com/AMWA-TV/bcp-nmos-ndi/actions?query=workflow%3ALint)
 [![Render Status](https://github.com/AMWA-TV/bcp-nmos-ndi/workflows/Render/badge.svg)](https://github.com/AMWA-TV/bcp-nmos-ndi/actions?query=workflow%3ARender)
