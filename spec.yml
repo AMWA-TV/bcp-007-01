@@ -1,10 +1,10 @@
-amwa_id: BCP-NMOS-NDI
-url: https://specs.amwa.tv/bcp-nmos-ndi
+amwa_id: BCP-007-01
+url: https://specs.amwa.tv/bcp-007-01
 name: NMOS With NDI
 status: Work In Progress
-repo_name: bcp-nmos-ndi
-alt_repo_name: nmos-bcp-nmos-ndi
-repo_url: https://github.com/AMWA-TV/bcp-nmos-ndi
+repo_name: bcp-007-01
+alt_repo_name: bcp-nmos-ndi
+repo_url: https://github.com/AMWA-TV/bcp-007-01
 releases:
-default_branch: main
-show_in_index: false
+default_branch: v1.0-dev
+show_in_index: true

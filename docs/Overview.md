@@ -1,4 +1,4 @@
-# AMWA BCP-NMOS-NDI: NMOS With NDI
+# AMWA BCP-007-01: NMOS With NDI
 {:.no_toc}
 
 - A markdown unordered list which will be replaced with the ToC, excluding the "Contents header" from above
