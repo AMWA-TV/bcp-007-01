@@ -1,7 +1,8 @@
-# \[Work In Progress\] BCP-007-01: NMOS With NDI
 
-[![Lint Status](https://github.com/AMWA-TV/bcp-nmos-ndi/workflows/Lint/badge.svg)](https://github.com/AMWA-TV/bcp-nmos-ndi/actions?query=workflow%3ALint)
-[![Render Status](https://github.com/AMWA-TV/bcp-nmos-ndi/workflows/Render/badge.svg)](https://github.com/AMWA-TV/bcp-nmos-ndi/actions?query=workflow%3ARender)
+# \[Work In Progress\] AMWA BCP-007-01: NMOS With NDI
+
+[![Lint Status](https://github.com/AMWA-TV/bcp-007-01/workflows/Lint/badge.svg)](https://github.com/AMWA-TV/bcp-007-01/actions?query=workflow%3ALint)
+[![Render Status](https://github.com/AMWA-TV/bcp-007-01/workflows/Render/badge.svg)](https://github.com/AMWA-TV/bcp-007-01/actions?query=workflow%3ARender)
 
 This repository holds the source for this Specification, part of the family of [Networked Media Open Specifications](https://specs.amwa.tv/nmos) from the [Advanced Media Workflow Association](https://amwa.tv)
 
