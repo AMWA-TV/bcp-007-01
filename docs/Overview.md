@@ -60,14 +60,14 @@ A "stream" as defined in the NDI SDK. An NDI Stream is a multiplexed structure t
 
 ### Native NDI Sender
 
-A "sender" of an NDI stream as defined in the NDI SDK. This SHALL NOT be inferred to be a “sender” as defined in the NMOS Glossary. Note that the same physical or logical apparatus MAY simultaneously act as an NMOS Sender and a Native NDI Sender.
+A "sender" of an NDI stream as defined in the NDI SDK. This SHALL NOT be inferred to be a “Sender” as defined in the NMOS Glossary. Note that the same physical or logical apparatus MAY simultaneously act as an NMOS Sender and a Native NDI Sender.
 
 ### Native NDI Receiver
 
 A "receiver" of an NDI stream as defined in the NDI SDK. This SHALL NOT be inferred to be a “Receiver” as defined in the NMOS Glossary. Note that the same physical or logical apparatus MAY simultaneously act as an NMOS Receiver and a Native NDI Receiver.
 
 ### NDI Device
-A Native NDI NDI Device which implements IS-04 and allows registration in a Registry
+A Native NDI Device which implements IS-04 and allows registration in an NMOS Registry
 
 ### NDI Sender
 
@@ -83,13 +83,13 @@ An NDI stream which utilizes proprietary codecs for audio and video. NDI Full Ba
 
 ### NDI HX, NDI HX2, NDI HX3
 
-NDI High Efficiency profiles, named **NDI HX**, **NDI HX2**, and **NDI HX3** utilize H.264/AVC, H.265/HEVC AAC and Opus codecs. These are supported by the NDI Advanced SDK only.
+NDI High Efficiency profiles, named **NDI HX**, **NDI HX2**, and **NDI HX3** utilize H.264/AVC, H.265/HEVC, AAC and Opus codecs. These are supported by the NDI Advanced SDK only.
 
-**NDI HX** utilizes Long-GOP H.264 video encoding at maximum Full HD resolution, and AAC audio encoding. NDI HX is sometimes stylized **NDI|HX** in some documentation.
+**NDI HX** utilizes Long-GOP H.264 video encoding at maximum Full HD resolution and AAC audio encoding. NDI HX is sometimes stylized **NDI|HX** in some documentation.
 
-**NDI HX2** utilizes H.264 or H.265 Long-GOP video coding up to UHD resolution, and AAC or Opus audio encoding. NDI HX2 is sometimes stylized **NDI|HX2** in some documentation.
+**NDI HX2** utilizes H.264 or H.265 Long-GOP video coding up to UHD resolution and AAC or Opus audio encoding. NDI HX2 is sometimes stylized **NDI|HX2** in some documentation.
 
-**NDI HX3** utilizes H.264 or H.265 Short-GOP coding up to UHD resolution to minimize latency with AAC or Opus audio encoding. NDI HX3 is sometimes stylized **NDI|HX3** in some documentation.
+**NDI HX3** utilizes H.264 or H.265 Short-GOP video coding up to UHD resolution and AAC or Opus audio encoding. NDI HX3 is sometimes stylized **NDI|HX3** in some documentation.
 
 ### NDI
 
@@ -114,13 +114,13 @@ Metadata connections can be implicitly established by the NDI SDK when video con
 
 ## NMOS-NDI Model
 
-Native NDI Devices, Native NDI Receivers and Native NDI Senders MAY be represeneted by NMOS Devices/Nodes, Receivers and Senders repectively.
+Native NDI Devices, Native NDI Receivers and Native NDI Senders MAY be represented by NMOS Devices/Nodes, Receivers and Senders repectively.
 
 A controller which supports NDI connection management via IS-05 SHOULD support connection of NDI Receivers to NDI Senders. This controller MAY also support connection of NDI Receivers to Native NDI senders, however it SHALL determine its list of available Native NDI Senders through its own means. 
 
 NDI Devices SHOULD NOT preclude connections established with Native NDI devices via the NDI SDK.
 
-If an NDI Stream is connected to an NDI Receiver outside of IS-05, the Receiver MUST update its `active` status to the Non-NMOS device.
+If an NDI Stream is connected to an NDI Receiver outside of IS-05, the transport parameters of the Connection API of the Receiver MUST be updated to reflect the running parameters which have been set via the alternate protocol. The Receiver MUST update its Node API `subscription.active` property accordingly and set `subscription.sender_id` to `null`.
 
 Native NDI Senders do not appear in an NMOS Registry.  They MAY be discovered through the NDI discovery mechanism through the NDI SDK. 
 
@@ -191,106 +191,68 @@ Use cases are informative only and provided as examples.
 
 ### Multiplexed Flow Model
 
-Senders and Receivers of NDI Streams SHALL be always represented as a mux, as NDI connections MAY contain multiple essences including video, audio and metadata.
+Receivers of NDI Streams SHALL have the `format` attribute set to `urn:x-nmos:format:mux` and Senders of NDI Streams SHALL be associated with a Flow having the `foramt` attribute set to `urn:x-nmos:format:mux`, as NDI connections MAY contain multiple essences including video, audio and metadata.
 
-The current NDI SDK limits to a maximum of one each video, audio and metadata, but this specification supports future SDK versions which support multiple audio, video or metadata flows.
+A Flow of `urn:x-nmos:format:mux` format SHALL have parents video or audio sub-Flows. The current NDI SDK limits to a maximum of one of each video, audio and metadata sub-Flow, but this specification supports future SDK versions which may support multiple audio, video or metadata sub-Flows.
 
-These multiplexed flows MUST be modeled as `mux` format.
-
-Metadata flows are not explicitly modeled in NMOS and SHALL be considered implicit with an audio or video flow.
-
-The NDI muxed flow SHALL have parents of video or audio flows.
-
-#### NDI Muxed Sender
+NDI Metadata is not explicitly modeled in NMOS and SHOULD be considered implicit with an audio or video Sub-Flow.
 
 ![MUX Sender Model](images/NMOS-NDI-Mux-sender-drawio.svg)
-
-The NDI Sender receives its `flow_id` from a muxed flow of media_type `application/ndi`, which is parent to one or more video or audio flows. 
-
-The muxed flow receives its `source_id` from a muxed source, which is parent to one or more video or audio sources.
-
-
-#### NDI Muxed Receiver
-
-The NDI Receiver SHALL be modelled as a muxed receiver and its `format` shall be `urn:x-nmos:format:mux`
-
 
 ## NDI IS-04 Sources, Flows and Senders
 
 ### Flows
 
-**MUX flows**
+**MUX Flow**
 
-An NDI Sender shall be fed by a muxed flow. The NDI muxed flow SHALL have parents of video or audio flows. 
+An NDI Sender must be associated with a mux Flow having the `format` attribute set to `urn:x-nmos:format:mux` and the `media_type` attribute set to `application/ndi`. 
 
-The NDI muxed flow SHALL include the following properties:
+The mux Flow must have parent video and/or audio sub-Flows identifing the sub-Flows multiplexed in the NDI Stream. The mux Flow must be associated with a Source of format `urn:x-nmos:format:mux`.
 
-`format` SHALL be `mux`
-`media_type` SHALL be `application\ndi`
+The mux Flow must have the attributes `audio_layers`, `video_layers` and `data_layers` set to the number of audio, video and data sub-Flows multiplexed in the NDI Stream.
 
+**Video sub-Flows**
 
-**Video flows**
+For NDI Full Bandwidth the video sub-Flows `media_type` attribute SHALL be `video/raw`. The NDI SDK may transcode the raw video sub-Flow to some native transport format.
 
-For NDI Full Bandwidth flows, `media_type` SHALL be `video/raw`
-
-For NDI HX, HX2 and HX3 flows, `media_type` SHALL be `video/H264` or `video/H265`
+For NDI HX, HX2 and HX3 the video sub-Flows `media_type` attribute SHALL be `video/H264` or `video/H265`
 
 NDI Senders SHOULD map the employed `NDIlib_FourCC_video_type` to the NMOS `bit-depth`, `component` and `sub-sampling` properties. 
 
-NDI supports video+alpha video flows. These SHALL be modeled as a single video flow, including a channel labelled `A` in the `components` parameters for the alpha channel.
+NDI supports video+alpha video flows. These SHALL be modeled as a single video Flow, including a channel labelled `A` in the `components` parameters for the alpha channel.
 
+The video sub-Flows must have their `layer` attribute set to the video sub-Flow index.
 
-**Audio flows**
+**Audio sub-Flows**
 
-For NDI Full Bandwidth, the NDI SDK could transcode the audio flow. As the paramaters of this intermediate transport encoding are not exposed, the `media_type` SHOULD be a supported PCM type.
+For NDI Full Bandwidth the audio sub-Flows `media_type` SHOULD be a supported PCM type such as `audio\L16`, `audio\L20`, or `audio\L24`. The NDI SDK may transcode the audio sub-Flow to some native transport format.
 
-For NDI HX, HX2 and HX3, `media_type` SHALL be `audio/mpeg4-generic` for audio flows utilizing the AAC codec, and SHALL be `audio/opus` for audio flows utilizing the Opus codec.
+For NDI HX, HX2 and HX3 the audio sub-Flows `media_type` attribute SHALL be `audio/mpeg4-generic` for audio sub-Flows utilizing the AAC codec, and SHALL be `audio/opus` for audio flows utilizing the Opus codec.
+
+The audio sub-Flows must have their `layer` attribute set to the video sub-Flow index.
 
 ### Sources
 
-> Perhaps talk about parent sources if relevant
-
+The Source associated with a mux Flow must have its `format` attribute set to `urn:x-nmos:format:mux` and its `parents` attribute must enumerate the Sources associated with the sub-Flows.
 
 ### Senders
 
-NDI Senders do not utilize SDP to describe the flow; therefore senders SHOULD specify the `manifest_href` as `null`.
+NDI Senders do not utilize SDP to describe the NDI Stream; therefore NDI Senders SHOULD have theit `manifest_href` attribute set to `null`.
 
-For NDI, the transport SHALL be specified:
+NDI Senders must have their `transport` attribute set to `urn:x-nmos:transport:ndi`.
 
-        transport: `urn:x-nmos:transport:ndi`
-
-Additional parameters and properties that MAY be specified by a device via the NDI SDK are not be included in the NMOS NDI model. Those paramaters are considered device-specific controls.
-
-
-
-
----
-
---- 
-
----
-
-> Review ended here. 2023-Sep-13
-
----
-
---- 
-
----
-
-
-
+NDI Senders must be associated with a mux Flow.
 
 ## NDI IS-04 Receivers
 
 ### Receivers
+The NDI Receiver SHALL have its `format` attribute set to `urn:x-nmos:format:mux` and the `media_types` array of the `caps attribute must contain `application/ndi`. 
 
-When an NDI Receiver is connected to a Native NDI sender through a connection API other than IS-05,  the Device SHALL set the `sender_id` parameter to `null`.
-
+When an NDI Receiver is connected to a Native NDI sender through a connection API other than IS-05, the transport parameters of the Connection API of such Receiver MUST be updated to reflect the running parameters which have been set via the alternate protocol. The Receiver MUST update its Node API `subscription.active` property accordingly and set `subscription.sender_id` to `null`.
 
 #### Receiver Capabilities
 
-For the muxed flow, the mux receiver must specify:
+An NDI Receiver must specify as a minimum the following capabilities:
 
 ```json
 "caps" : {
@@ -300,6 +262,8 @@ For the muxed flow, the mux receiver must specify:
 }
 ```
 
+Additional capabilities may be expressed in the `constraint_sets` array attribute of the Receiver for the stream of media type `application/ndi` and for the associated sub-streams. A sub-stream constraint set must have an associated `urn:x-nmos:cap:meta:format` attribute set to `urn:x-nmos:format:video` or `urn:x-nmos:format:audio`, an `urn:x-nmos:cap:meta:layer` attribute set to the associated per-format index and a `urn:x-nmos:cap:format:media_type` set to the associated sub-stream media type. Addional attributes of a sub-stream constraint set may complete the definition of the capabilities for such sub-srteam.
+
 > Additional capabilities for sub-flows MAY need to be expressed. This relies on additional work that has yet to be done.
 > Codecs for audio and video will need to be expressed
 
@@ -307,19 +271,15 @@ For the muxed flow, the mux receiver must specify:
 
 ### Transport Type
 
-NDI Flows SHALL utilize a new `transport` in IS-05:
-
- ```
- urn:x-nmos:transport:ndi
- ```
-
-This `transport` signifies a muxed NDI flow delivered by the NDI SDK.
+The IS-05 transport for NDI is urn:x-nmos:transport:ndi.
 
 ### Sender transport_file
 
 Not used.
 
 ### Sender Transport Parameters
+
+The IS-05 schemas sender_transport_params_ndi.json and constraints-schema-rtp.json describe the transport parameters assocaited with the NDI transport.
 
 ```json
 "transport_params": [{
@@ -343,7 +303,7 @@ The name of the stream as declared by the NDI Sender. The stream MAY contains mu
 **group_name**
 Indicate the NDI group of the source. Null indicates the default group.
 
-Although the NDI Advanced SDK does provide provisions for NDI Native Devices to specify additional transport parameters, they are part of the NMOS NDI model. These parameters and properties SHALL be considered device-specific.
+Although the NDI Advanced SDK does provide provisions for NDI Native Devices to specify additional transport parameters, these parameters and properties SHALL be considered device-specific.
 
 ### Receiver Parameters
 
@@ -359,10 +319,10 @@ Although the NDI Advanced SDK does provide provisions for NDI Native Devices to 
 ```
 
 **interface_ip**
-IP address of the network interface the receiver SHOULD use.
+IP address of the network interface the receiver should use. If set to auto the receiver should determine which interface to use for itself, for example by using the routing tables.
 
 **server_host**
-Hostname or IP hosting the NDI server. If the parameter is set to “auto” the Receiver SHOULD establish for itself which server it SHOULD use, based on a discovery mechanism or its own internal configuration. A null value indicates that the Receiver has not yet been configured. MAY be IP address or hostname URL.
+Hostname or IP hosting the NDI server. A null value indicates that the Receiver has not yet been configured.
 
 **server_port**
 Port for NDI server. If the parameter is set to “auto” the Receiver SHOULD establish for itself which port it SHOULD use, based on a discovery mechanism or its own internal configuration.
@@ -373,17 +333,18 @@ The name of the stream as declared by the NDI sender. The stream MAY contain mul
 **group_name**
 Indicate the NDI group of the source, null indicates the default group
 
+Although the NDI Advanced SDK does provide provisions for NDI Native Devices to specify additional transport parameters, these parameters and properties SHALL be considered device-specific.
+
 ## Controllers
 
 ### Query of Registered Nodes, Senders and Receivers
 
 A controller MAY query registered Nodes, NDI Senders and NDI Receivers from the registry. An NDI Receiver MUST be registered in the registry in order to allow a controller to manage connections to it through IS-05.
 
-
-An NDI source MAY be registered in the registry if the NDI device implements the required IS-04 services. However, a controller MAY direct a receiver to connect to a Native NDI Sender if the controller has knowledge of that sender (either through NDI discovery or other means).
+A Native NDI Device MAY be registered in the registry if it implements the required IS-04 services of an NDI Device. However, a controller MAY direct a NDI Receiver to connect to a Native NDI Sender if the controller has knowledge of that sender (either through NDI discovery or other means).
 
 ### Discovery of Native NDI Senders
 
-A controller MAY discover Native NDI Senders via the NDI SDK. This could allow a controller to establish connections between an NDI Receiver and an NDI Native Sender.
+A controller MAY discover Native NDI Senders via the NDI SDK. This could allow a controller to establish connections between an NDI Receiver and a NDI Native Sender.
 
 Native NDI Devices which do not implement NMOS IS-04 SHALL NOT be registered in an NMOS Registry.
