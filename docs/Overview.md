@@ -295,7 +295,7 @@ Use cases are informative only and provided as examples.
 
 - NDI Receiver (device B) is informed of Native NDI Sender (device X) by its own means; this could be via NDI discovery.
 - NDI Receiver (device B) initiates connection to Native NDI Sender (device X) directly via NDI SDK.
-- - NDI Receiver updates its IS-04 `active` state, sets the `sender_id` to `null`, increments the version number
+- NDI Receiver updates its IS-04 `active` state, sets the `sender_id` to `null`, increments the version number
 - The controller does not initiate the connection, but can monitor the connection status via IS-04 and IS-05
 
 ### Use Case 4: NDI Sender to Native NDI Receiver - Non-NMOS Connection
