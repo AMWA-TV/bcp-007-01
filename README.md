@@ -10,7 +10,7 @@ This repository holds the source for this Specification, part of the family of [
 
 ### What does it do?
 
-- Enables Registration, Discovery, and Connection Management of NDI Endpoints using the AMWA IS-04 and IS-05 NMOS Specifications.
+- Enables Registration, Discovery, and Connection Management of NDI endpoints using the AMWA IS-04 and IS-05 NMOS Specifications.
 - Specifies the interaction of NMOS-enabled NDI nodes and non-NMOS NDI nodes.
 
 ### Why does it matter?
@@ -19,9 +19,9 @@ This repository holds the source for this Specification, part of the family of [
 
 ### How does it work?
 
-- It specifies how NDI senders and receivers are defined within the scope of IS-04 and IS-05.
-- It specifies how connections can be made to non-NMOS NDI senders.
-- It defines the representation of muxed NDI flows of video, audio and metadata.
+- It specifies how NDI senders and receivers are defined within the scope of IS-04 and IS-05
+- It specifies how NDI receivers can be connected to NMOS NDI senders or native NDI senders
+- It defines the representation of muxed NDI flows of video, audio and metadata
 
 <!-- INTRO-END -->
 
