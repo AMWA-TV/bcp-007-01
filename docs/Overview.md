@@ -19,19 +19,17 @@ See also the [NMOS Technical Overview](https://specs.amwa.tv/nmos/main/docs/Tech
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
 and "OPTIONAL" in this document are to be interpreted as described in [RFC-2119](https://datatracker.ietf.org/doc/html/rfc2119).
 
-
 ## Dependencies
-
 
 This document was written based upon [NDI® Advanced SDK Version 5.5](https://ndi.video/sdk/), however devices which implement other versions of the SDK MAY also be supported.
 
 This document depends upon the following reference documents:
+
 - [NMOS IS-04 - Discovery and Registration](https://specs.amwa.tv/is-04/)
 - [NMOS IS-05 - Device Connection Management](https://specs.amwa.tv/is-05/)
-- [NMOS BCP-004-01 - Receiver Capabilites](https://specs.amwa.tv/bcp-004-01/)
+- [NMOS BCP-004-01 - Receiver Capabilities](https://specs.amwa.tv/bcp-004-01/)
 - [NMOS BCP-006-02 - NMOS with H.264](https://specs.amwa.tv/bcp-006-02/)
 - [NMOS BCP-006-03 - NMOS with H.265](https://specs.amwa.tv/bcp-006-03/)
-
 
 ## Definitions
 
@@ -48,11 +46,12 @@ The NDI Software Development Kit (SDK) is offered in two variants. The base vers
 A “device” as defined in the NDI SDK. This is not the same as a “Device” as defined in the NMOS Glossary. Note that the same physical or logical apparatus MAY simultaneously act as an NMOS Device and a Native NDI Device.
 
 ### Non-NMOS NDI Device
+
 A Native NDI Device which does not support the NMOS specifications.
 
 ### NDI Stream
 
-A "stream" as defined in the NDI SDK. An NDI Stream is a multiplexed structure that could include one or more video, audio and metadata flows. 
+A "stream" as defined in the NDI SDK. An NDI Stream is a multiplexed structure that could include one or more video, audio and metadata flows.
 
 ### Native NDI Sender
 
@@ -63,6 +62,7 @@ A "sender" of an NDI stream as defined in the NDI SDK. This is not the same as a
 A "receiver" of an NDI stream as defined in the NDI SDK. This is not the same as a “Receiver” as defined in the NMOS Glossary. Note that the same physical or logical apparatus MAY simultaneously act as an NMOS Receiver and a Native NDI Receiver.
 
 ### NDI Device
+
 A Native NDI Device which implements IS-04 and allows registration in an NMOS Registry and implements IS-05 for connection management.
 
 ### NDI Sender
@@ -95,12 +95,7 @@ This document uses the term "NDI" when referring to all NDI variants, and specif
 
 NDI Streams utilize a variety of codecs to compress media. In many cases, the NDI SDK negotiates between Native NDI Devices to select the transport and encoding parameters used for an NDI Stream. A Native NDI Receiver does not learn about the encoding and transport parameters of an NDI Stream until a connection is established.
 
-
-### NDI Full Bandwidth
-
 The NDI SDK, by default, automatically selects and negotiates encoding parameters between Native NDI Devices. Media content enters the Native NDI Sender as raw, uncompressed media and raw, uncompressed media emerges from Native NDI Receivers.
-
-### NDI HX, NDI HX2, NDI HX3
 
 The NDI Advanced SDK supports compressed NDI Streams utilizing H.264, H.265, AAC and Opus codecs. Media content enters the Native NDI Sender as compressed media and compressed media emerges from Native NDI Receivers.
 
@@ -110,9 +105,9 @@ Metadata connections can be implicitly established by the NDI SDK when video con
 
 ## NMOS-NDI Model
 
-Native NDI Devices, Native NDI Receivers and Native NDI Senders MAY be represented by NMOS Devices/Nodes, Receivers and Senders respectively.
+Native NDI Devices, Native NDI Receivers and Native NDI Senders are represented by NMOS Devices/Nodes, Receivers and Senders respectively.
 
-A controller which supports NDI connection management via IS-05 MUST support connection of NDI Receivers to NDI Senders. This controller MAY also support connection of NDI Receivers to Native NDI senders, however it MUST determine its list of available Native NDI Senders through its own means. 
+A controller which supports NDI connection management via IS-05 MUST support connection of NDI Receivers to NDI Senders. This controller MAY also support connection of NDI Receivers to Native NDI senders, however the discovery of such senders is outside the scope of this document.
 
 ### Non-NMOS Connections to NDI Devices
 
@@ -130,31 +125,31 @@ A Flow of `urn:x-nmos:format:mux` format MUST have parents video or audio sub-Fl
 
 ### Flows
 
-**MUX Flow**
+#### MUX Flow
 
-An NDI Sender MUST be associated with a mux Flow having the `format` attribute set to `urn:x-nmos:format:mux` and the `media_type` attribute set to `application/ndi`. 
+An NDI Sender MUST be associated with a mux Flow having the `format` attribute set to `urn:x-nmos:format:mux` and the `media_type` attribute set to `application/ndi`.
 
-The mux Flow MUST have parent video and/or audio sub-Flows identifying the sub-Flows multiplexed in the NDI Stream. The mux Flow must be associated with a Source of format `urn:x-nmos:format:mux`.
+The mux Flow MUST have parent video and/or audio sub-Flows identifying the sub-Flows multiplexed in the NDI Stream. The mux Flow MUST be associated with a Source of format `urn:x-nmos:format:mux`.
 
-**Video sub-Flows**
+#### Video sub-Flows
 
-For NDI Full Bandwidth the video sub-Flows `media_type` attribute MUST be `video/raw`. 
+For NDI Full Bandwidth the video sub-Flows `media_type` attribute MUST be `video/raw`.
 
 For NDI HX, HX2 and HX3 the video sub-Flows `media_type` attribute MUST be `video/H264` or `video/H265`.
 
-NDI Senders SHOULD map the employed `NDIlib_FourCC_video_type` to the NMOS `bit-depth`, `component` and `sub-sampling` properties. 
+NDI Senders SHOULD map the employed `NDIlib_FourCC_video_type` to the NMOS `bit-depth`, `component` and `sub-sampling` properties.
 
 NDI video+alpha video flows MUST be modeled as a single video sub-Flow, including a channel labelled `A` in the `components` parameters for the alpha channel.
 
-**Audio sub-Flows**
+#### Audio sub-Flows
 
-For NDI Full Bandwidth the audio sub-Flows `media_type` SHOULD be a supported PCM type such as `audio\L16`, `audio\L20`, or `audio\L24`. 
+For NDI Full Bandwidth the audio sub-Flows `media_type` SHOULD be a supported PCM type such as `audio\L16`, `audio\L20`, or `audio\L24`.
 
 For NDI HX, HX2 and HX3 the audio sub-Flows `media_type` attribute MUST be `audio/mpeg4-generic` or `audio/opus`.
 
 ### Sources
 
-The Source associated with a mux Flow must have its `format` attribute set to `urn:x-nmos:format:mux` and its `parents` attribute must enumerate the Sources associated with the sub-Flows.
+The Source associated with a mux Flow MUST have its `format` attribute set to `urn:x-nmos:format:mux` and its `parents` attribute MUST enumerate the Sources associated with the sub-Flows.
 
 ### Senders
 
@@ -165,7 +160,8 @@ NDI Senders MUST have their `transport` attribute set to `urn:x-nmos:transport:n
 NDI Senders MUST be associated with a mux Flow.
 
 ### Receivers
-The NDI Receiver MUST have its `format` attribute set to `urn:x-nmos:format:mux`. 
+
+The NDI Receiver MUST have its `format` attribute set to `urn:x-nmos:format:mux`.
 
 #### Receiver Capabilities
 
@@ -179,14 +175,13 @@ An NDI Receiver MUST specify as a minimum the following capabilities:
 }
 ```
 
-Additional capabilities MAY be expressed in the `constraint_sets` array attribute of the Receiver for the stream of media type `application/ndi` and for the associated sub-streams. 
+Additional capabilities MAY be expressed in the `constraint_sets` array attribute of the Receiver for the stream of media type `application/ndi` and for the associated sub-streams.
 
 ## NDI IS-05 Resources
 
 ### Transport Type
 
-The IS-05 transport for NDI is `urn:x-nmos:transport:ndi`. 
-
+The IS-05 transport for NDI is `urn:x-nmos:transport:ndi`.
 
 ### Sender transport_file
 
@@ -197,20 +192,21 @@ Not used.
 The IS-05 schemas `sender_transport_params_ndi.json` and `constraints_schema_sender_ndi.json` describe the transport parameters associated with the NDI transport.
 
 ```json
-"transport_params": [{
-        "server_ip": "10.10.10.10",
-        "server_port": 5960,
-        "source_name": "ndi-sender-unique-name",
-        "group_name": "camera1"
-
-}]
+[
+  {
+    "server_ip": "10.10.10.10",
+    "server_port": 5960,
+    "source_name": "ndi-sender-unique-name",
+    "group_name": "camera1"
+  }
+]
 ```
 
 **server_ip**
-IP address hosting the NDI server (IP address of interface bound to the server). If the parameter is set to auto the Sender SHOULD establish for itself which interface it SHOULD use, based on its own internal configuration. A `null` value indicates that the Sender has not yet been configured.
+IP address hosting the NDI server (IP address of interface bound to the server). If the parameter is set to auto the Sender MUST establish for itself which interface it can use, based on its own internal configuration. A `null` value indicates that the Sender has not yet been configured.
 
 **server_port**
-Port for the NDI server. If the parameter is set to `auto` the Sender SHOULD establish for itself which port it SHOULD use, based on its own internal configuration.
+Port for the NDI server. If the parameter is set to `auto` the Sender MUST establish for itself which port it can use, based on its own internal configuration.
 
 **source_name**
 The name of the NDI stream as declared by the NDI Sender.
@@ -222,18 +218,18 @@ Although the NDI Advanced SDK does provide provisions for NDI Native Devices to 
 
 ### Receiver Parameters
 
-The IS-05 schemas `receiver_transport_params_ndi.json` and `constraints_schema_receiver_ndi.json` describe the transport parameters assocaited with the NDI transport.
-
+The IS-05 schemas `receiver_transport_params_ndi.json` and `constraints_schema_receiver_ndi.json` describe the transport parameters associated with the NDI transport.
 
 ```json
- "transport_params": [{
-        "interface_ip": "10.10.10.20",
-        "server_host": "10.10.10.10",
-        "server_port": 5960,
-        "source_name": "ndi-sender-unique-name",
-        "group_name": "camera1"
-    }]
-
+[
+  {
+    "interface_ip": "10.10.10.20",
+    "server_host": "10.10.10.10",
+    "server_port": 5960,
+    "source_name": "ndi-sender-unique-name",
+    "group_name": "camera1"
+  }
+]
 ```
 
 **interface_ip**
@@ -246,7 +242,7 @@ Hostname or IP hosting the NDI server. A `null` value indicates that the Receive
 Port for NDI server. If set to `auto` the receiver MUST determine which port to use.
 
 **source_name**
-The name of the NDI stream as declared by the NDI sender. 
+The name of the NDI stream as declared by the NDI sender.
 
 **group_name**
 Indicate the NDI group of the source, `null` indicates the default group.
@@ -257,12 +253,11 @@ Although the NDI Advanced SDK does provide provisions for NDI Native Devices to 
 
 A controller MUST be able to discover NDI Senders and NDI Receivers by using the query API.
 
-A controller MUST be able to connect an NDI Receiver to an NDI Sender by using the IS-05 API.
+A controller MUST be able to connect an NDI Receiver to an NDI Sender by using the IS-05 API. See example [Use Case 1](#use-case-1-ndi-sender-to-ndi-receiver---is-05-connection).
 
 A controller MAY be able to discover Native NDI Senders.
 
-A controller MAY be able to connect an NDI Receiver to a Native NDI Sender by using the IS-05 API. See example [Use Case 2: Native NDI Sender to NDI Receiver - IS-05 Connection](#use-case-2-native-ndi-sender-to-ndi-receiver---is-05-connection)
-
+A controller MAY be able to connect an NDI Receiver to a Native NDI Sender by using the IS-05 API. See example [Use Case 2](#use-case-2-native-ndi-sender-to-ndi-receiver---is-05-connection).
 
 ## Use Case Scenarios (Informative)
 
@@ -270,31 +265,30 @@ Use cases are informative only and provided as examples.
 
 ![NMOS-NDI Model](images/NMOS-NDI-Ecosystem-drawio.svg)
 
-
 ### Use Case 1: NDI Sender to NDI Receiver - IS-05 Connection
 
 ![NMOS-NDI Model](images/NMOS-NDI-UseCase1-drawio.svg)
 
-- Controller is informed of sender (device C) through IS-04.
-- Controller is informed of receiver (device D) through IS-04. 
+- Controller is informed of sender (device C) through IS-04
+- Controller is informed of receiver (device D) through IS-04
 - Controller initiates connection to receiver (device D) from sender (device C) via IS-05
-- NDI Sender (device C) and NDI Receiver (device D)  report their status as outlined in IS-05.
+- NDI Receiver (device D) reports its connections status and transport parameters as outlined in IS-04 and IS-05
 
 ### Use Case 2: Native NDI Sender to NDI Receiver - IS-05 Connection
 
 ![NMOS-NDI Model](images/NMOS-NDI-UseCase2-drawio.svg)
 
-- Controller is informed of sender (device W) by its own means; this could be via NDI discovery.
-- Controller is informed of receiver (device A) through IS-04 
+- Controller is informed of sender (device W) by its own means; this could be via NDI discovery
+- Controller is informed of receiver (device A) through IS-04
 - Controller initiates connection to receiver (device A) from sender (device W) via IS-05
-- NDI Receiver (device A) reports its status as outlined in IS-04.
+- NDI Receiver (device A) reports its connections status and transport parameters as outlined in IS-04 and IS-05
 
 ### Use Case 3: Native NDI Sender to NDI Receiver - Non-NMOS Connection
 
 ![NMOS-NDI Model](images/NMOS-NDI-UseCase3-drawio.svg)
 
-- NDI Receiver (device B) is informed of Native NDI Sender (device X) by its own means; this could be via NDI discovery.
-- NDI Receiver (device B) initiates connection to Native NDI Sender (device X) directly via NDI SDK.
+- NDI Receiver (device B) is informed of Native NDI Sender (device X) by its own means; this could be via NDI discovery
+- NDI Receiver (device B) initiates connection to Native NDI Sender (device X) directly via NDI SDK
 - NDI Receiver updates its IS-04 `active` state, sets the `sender_id` to `null`, increments the version number
 - The controller does not initiate the connection, but can monitor the connection status via IS-04 and IS-05
 
@@ -302,27 +296,26 @@ Use cases are informative only and provided as examples.
 
 ![NMOS-NDI Model](images/NMOS-NDI-UseCase4-drawio.svg)
 
-- In this scenario, it is assumed the NDI Sender is active.
-- Native NDI Receiver (device X) is informed of NDI Sender (device B) by its own means; this could be via NDI discovery.
-- Native NDI Receiver (device X) initiates connection to NDI Sender (device B) directly via NDI SDK.
-- The controller does not initiate the connection and cannot monitor the state of the connection.
+- In this scenario, it is assumed the NDI Sender is active
+- Native NDI Receiver (device X) is informed of NDI Sender (device B) by its own means; this could be via NDI discovery
+- Native NDI Receiver (device X) initiates connection to NDI Sender (device B) directly via NDI SDK
+- The controller does not initiate the connection and cannot monitor the state of the connection
 
 ### Use Case 5: Native NDI Sender to Native NDI Receiver - Non-NMOS Connection
 
 ![NMOS-NDI Model](images/NMOS-NDI-UseCase5-drawio.svg)
 
-- This scenario exists outside the realm of NMOS. The controller may not be aware of these devices, and does not initiate any connection between them.
-- Native NDI Receiver (device Z) and Native NDI Sender (device Y) discover  through their own means. this could be via NDI discovery.
-- Connection from Native NDI Sender (device Y) to Native NDI Receiver (device Z) is performed by the NDI SDK.
+- This scenario exists outside the realm of NMOS. The controller may not be aware of these devices, and does not initiate any connection between them
+- Native NDI Receiver (device Z) and Native NDI Sender (device Y) discover  through their own means. this could be via NDI discovery
+- Connection from Native NDI Sender (device Y) to Native NDI Receiver (device Z) is performed by the NDI SDK
 
 ### Use Case 6: NDI Sender to NDI Receiver - Non-NMOS Connection
 
 ![NMOS-NDI Model](images/NMOS-NDI-UseCase6-drawio.svg)
 
-- In this scenario, it is assumed the NDI Sender is active.
-- In this scenario, both sender (device E) and receiver (device F) are NMOS devices, but connection is established outside of IS-05. 
-- NDI Receiver (device E) and NDI Sender (device F) discover  through their own means. this could be via NDI discovery.
-- Connection from NDI Sender (device E) to NDI Receiver (device F) is performed by the NDI SDK.
+- In this scenario, it is assumed the NDI Sender is active
+- In this scenario, both sender (device E) and receiver (device F) are NMOS devices, but connection is established outside of IS-05
+- NDI Receiver (device E) and NDI Sender (device F) discover  through their own means. this could be via NDI discovery
+- Connection from NDI Sender (device E) to NDI Receiver (device F) is performed by the NDI SDK
 - NDI Receiver updates its IS-04 `active` state, sets the `sender_id` to `null`, increments the version number
-- The controller does not initiate the connection, but can monitor the connection status via IS-04 and IS-05.
-
+- The controller does not initiate the connection, but can monitor the connection status via IS-04 and IS-05
