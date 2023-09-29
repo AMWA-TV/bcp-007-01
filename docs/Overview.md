@@ -305,8 +305,8 @@ Use cases are informative only and provided as examples.
 
 ![NMOS-NDI Model](images/NMOS-NDI-UseCase5-drawio.svg)
 
-- This scenario exists outside the realm of NMOS. The controller may not be aware of these devices, and does not initiate any connection between them
-- Native NDI Receiver (device Z) and Native NDI Sender (device Y) discover  through their own means. this could be via NDI discovery
+- This scenario exists outside the realm of NMOS. The controller might not be aware of these devices, and does not initiate any connection between them
+- Native NDI Receiver (device Z) and Native NDI Sender (device Y) discover through their own means; this could be via NDI discovery
 - Connection from Native NDI Sender (device Y) to Native NDI Receiver (device Z) is performed by the NDI SDK
 
 ### Use Case 6: NDI Sender to NDI Receiver - Non-NMOS Connection
@@ -315,7 +315,7 @@ Use cases are informative only and provided as examples.
 
 - In this scenario, it is assumed the NDI Sender is active
 - In this scenario, both sender (device E) and receiver (device F) are NMOS devices, but connection is established outside of IS-05
-- NDI Receiver (device E) and NDI Sender (device F) discover  through their own means. this could be via NDI discovery
+- NDI Receiver (device E) and NDI Sender (device F) discover through their own means; this could be via NDI discovery
 - Connection from NDI Sender (device E) to NDI Receiver (device F) is performed by the NDI SDK
 - NDI Receiver updates its IS-04 `active` state, sets the `sender_id` to `null`, increments the version number
 - The controller does not initiate the connection, but can monitor the connection status via IS-04 and IS-05
