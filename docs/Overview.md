@@ -81,11 +81,11 @@ An NDI stream which utilizes proprietary codecs for audio and video. NDI Full Ba
 
 NDI High Efficiency profiles, named **NDI HX**, **NDI HX2**, and **NDI HX3**, utilize H.264/AVC, H.265/HEVC, AAC and Opus codecs. These are supported by the NDI Advanced SDK only.
 
-**NDI HX** utilizes Long-GOP H.264 video encoding at maximum Full HD resolution and AAC audio encoding. NDI HX is sometimes stylized **NDI|HX** in some documentation.
+**NDI HX** utilizes Long-GOP H.264 video encoding at maximum Full HD resolution and AAC audio encoding. NDI HX is sometimes stylized **NDI\|HX** in some documentation.
 
-**NDI HX2** utilizes H.264 or H.265 Long-GOP video coding up to UHD resolution and AAC or Opus audio encoding. NDI HX2 is sometimes stylized **NDI|HX2** in some documentation.
+**NDI HX2** utilizes H.264 or H.265 Long-GOP video coding up to UHD resolution and AAC or Opus audio encoding. NDI HX2 is sometimes stylized **NDI\|HX2** in some documentation.
 
-**NDI HX3** utilizes H.264 or H.265 Short-GOP video coding up to UHD resolution and AAC or Opus audio encoding. NDI HX3 is sometimes stylized **NDI|HX3** in some documentation.
+**NDI HX3** utilizes H.264 or H.265 Short-GOP video coding up to UHD resolution and AAC or Opus audio encoding. NDI HX3 is sometimes stylized **NDI\|HX3** in some documentation.
 
 ### NDI
 
@@ -143,7 +143,7 @@ NDI video+alpha video flows MUST be modeled as a single video sub-Flow, includin
 
 #### Audio sub-Flows
 
-For NDI Full Bandwidth the audio sub-Flows `media_type` SHOULD be a supported PCM type such as `audio\L16`, `audio\L20`, or `audio\L24`.
+For NDI Full Bandwidth the audio sub-Flows `media_type` SHOULD be a supported PCM type such as `audio/L16`, `audio/L20`, or `audio/L24`.
 
 For NDI HX, HX2 and HX3 the audio sub-Flows `media_type` attribute MUST be `audio/mpeg4-generic` or `audio/opus`.
 
@@ -202,19 +202,19 @@ The IS-05 schemas `sender_transport_params_ndi.json` and `constraints_schema_sen
 ]
 ```
 
-**server_ip**
+**server_ip**:
 IP address hosting the NDI server (IP address of interface bound to the server). If the parameter is set to auto the Sender MUST establish for itself which interface it can use, based on its own internal configuration. A `null` value indicates that the Sender has not yet been configured.
 
-**server_port**
+**server_port**: 
 Port for the NDI server. If the parameter is set to `auto` the Sender MUST establish for itself which port it can use, based on its own internal configuration.
 
-**source_name**
+**source_name**:
 The name of the NDI stream as declared by the NDI Sender.
 
-**group_name**
+**group_name**: 
 The NDI group of the source. `null` indicates the default group.
 
-Although the NDI Advanced SDK does provide provisions for NDI Native Devices to specify additional Sender transport parameters, these parameters and properties SHOULD NOT be exposed in NMOS.
+Although the NDI Advanced SDK does allow NDI Native Devices to specify additional Sender transport parameters, these parameters and properties SHOULD NOT be exposed in NMOS.
 
 ### Receiver Parameters
 
@@ -232,22 +232,22 @@ The IS-05 schemas `receiver_transport_params_ndi.json` and `constraints_schema_r
 ]
 ```
 
-**interface_ip**
+**interface_ip**: 
 IP address of the network interface the receiver MUST use. If set to `auto` the receiver MUST determine which interface to use.
 
-**server_host**
+**server_host**: 
 Hostname or IP hosting the NDI server. A `null` value indicates that the Receiver has not yet been configured.
 
-**server_port**
-Port for NDI server. If set to `auto` the receiver MUST determine which port to use.
+**server_port**: 
+Port for the NDI server. If set to `auto` the receiver MUST determine which port to use.
 
-**source_name**
+**source_name**: 
 The name of the NDI stream as declared by the NDI sender.
 
-**group_name**
-Indicate the NDI group of the source, `null` indicates the default group.
+**group_name**: 
+The NDI group of the source, `null` indicates the default group.
 
-Although the NDI Advanced SDK does provide provisions for NDI Native Devices to specify additional Receiver transport parameters, these parameters and properties SHOULD NOT be exposed in NMOS.
+Although the NDI Advanced SDK does allow NDI Native Devices to specify additional Receiver transport parameters, these parameters and properties SHOULD NOT be exposed in NMOS.
 
 ## Controllers
 
