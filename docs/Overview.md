@@ -159,6 +159,19 @@ NDI Senders MUST have their `transport` attribute set to `urn:x-nmos:transport:n
 
 NDI Senders MUST be associated with a mux Flow.
 
+#### NDI Group Tags
+
+NDI Senders MAY specify the NDI groups through use of tags. NDI Group Tags SHALL use the URN `urn:x-nmos:transport:ndi:group`. Multiple tags MAY be specified, for example:
+```json
+"tags": {
+   "urn:x-nmos:tag:transport:ndi:group": [
+      "Cameras",
+      "Studio-A"
+   ]
+}
+```
+If NDI Group Tags are not specified, it is assumed the sender is part of the default NDI group.
+
 ### Receivers
 
 The NDI Receiver MUST have its `format` attribute set to `urn:x-nmos:format:mux`.
@@ -194,27 +207,22 @@ The IS-05 schemas `sender_transport_params_ndi.json` and `constraints_schema_sen
 ```json
 [
   {
-    "server_ip": "10.10.10.10",
-    "server_port": 5960,
+    "machine_name": "ndi-machine-name",
     "source_name": "ndi-sender-unique-name",
-    "group_name": "camera1"
+    "source_url" : "..."
   }
 ]
 ```
+#### machine_name
+The name of the sender node in the NDI domain. A node SHALL report the machine name being utilized by the NDI SDK. A controller SHOULD NOT specify a new `machine_name` but SHOULD use `auto` or the current `machine_name`. 
 
-**server_ip**:
-IP address hosting the NDI server (IP address of interface bound to the server). If the parameter is set to auto the Sender MUST establish for itself which interface it can use, based on its own internal configuration. A `null` value indicates that the Sender has not yet been configured.
+#### source_name
+The name of the NDI stream created by the Native NDI Sender in the NDI domain. This parameter SHALL NOT be concatenated with `machine_name` in the format `machine_name(source_name)`.
 
-**server_port**: 
-Port for the NDI server. If the parameter is set to `auto` the Sender MUST establish for itself which port it can use, based on its own internal configuration.
+| Informative note: In the NDI domain, the `source_name` and `machine_name` are concatenatedin the format `machine_name(source_name)` when streams are discovered and connected, however in the `transport_params`, these properties are kept independent.
 
-**source_name**:
-The name of the NDI stream as declared by the NDI Sender.
-
-**group_name**: 
-The NDI group of the source. `null` indicates the default group.
-
-Although the NDI Advanced SDK does allow NDI Native Devices to specify additional Sender transport parameters, these parameters and properties SHOULD NOT be exposed in NMOS.
+#### source_url 
+The URL of the sender as utilized by the NDI SDK. Sender MUST report this upon activation. The contents are proprietary to the NDI SDK and SHOULD NOT be interpreted. A controller SHOULD specify `auto` or the current value when setting this property. If a controller does not specify `source_url` when updating the transport parameters, the sender shall treat it as `auto`.
 
 ### Receiver Parameters
 
@@ -223,31 +231,26 @@ The IS-05 schemas `receiver_transport_params_ndi.json` and `constraints_schema_r
 ```json
 [
   {
-    "interface_ip": "10.10.10.20",
-    "server_host": "10.10.10.10",
-    "server_port": 5960,
+    "machine_name": "ndi-machine-name",
     "source_name": "ndi-sender-unique-name",
-    "group_name": "camera1"
+    "source_url" : "..."
   }
 ]
 ```
 
-**interface_ip**: 
-IP address of the network interface the receiver MUST use. If set to `auto` the receiver MUST determine which interface to use.
+#### machine_name
+This indicates the device name of the Native NDI Sender that is to be connected, as utilized by the NDI SDK.
 
-**server_host**: 
-Hostname or IP hosting the NDI server. A `null` value indicates that the Receiver has not yet been configured.
+#### source_name
+The name of the Native NDI Sender stream in the NDI domain that is to be connected to the Receiver. This property SHALL NOT be concatenatedwith `machine_name` in the format `machine_name(source_name)`.
 
-**server_port**: 
-Port for the NDI server. If set to `auto` the receiver MUST determine which port to use.
+> Informative notes: In the NDI domain, the `source_name` and `machine_name` are concatenatedin the format `machine_name(source_name)` when streams are discovered and connected, however in the `transport_params`, these properties are kept independent. 
 
-**source_name**: 
-The name of the NDI stream as declared by the NDI sender.
+#### source_url 
+The URL of the sender as utilized by the NDI SDK. The contents are proprietary to the NDI SDK and SHOULD NOT be interpreted. A controller SHOULD specify this parameter with values provided by a sender's `transport_params` or the NDI SDK discovery methods. If this parameter is set to `null` or `auto`, the receiver shall determine for itself the value of `source_url`.
 
-**group_name**: 
-The NDI group of the source, `null` indicates the default group.
-
-Although the NDI Advanced SDK does allow NDI Native Devices to specify additional Receiver transport parameters, these parameters and properties SHOULD NOT be exposed in NMOS.
+### Receiver Bahavior 
+ When making a connection in the NDI domain, the source stream may be specified by the combination of `machine_name` and `source_name`, or the `source_url`. If `machine_name` and `source_name` are specified in a receiver's `transport_params`, then `source_url` MAY be set to `null` or `auto`. If `source_url` is specified in a receiver's `transport_params`, both `machine_name` and `source_name` MAY be set to `null` or `auto`, however in this case, `machine_name` and `source_name` MUST be set to the same value.
 
 ## Controllers
 
