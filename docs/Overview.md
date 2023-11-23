@@ -248,7 +248,7 @@ machine name / source name SHOULD always be specified. Others MAY be specified.
 This indicates the device name of the Native NDI Sender that is to be connected, as utilized by the NDI SDK.
 
 #### source_name
-The name of the Native NDI Sender stream in the NDI domain that is to be connected to the Receiver. This property MUST NOT be concatenatedwith `machine_name` in the format `machine_name(source_name)`.
+The name of the Native NDI Sender stream in the NDI domain that is to be connected. This property MUST NOT be concatenatedwith `machine_name` in the format `machine_name(source_name)`.
 
 > Informative notes: In the NDI domain, the `source_name` and `machine_name` are concatenatedin the format `machine_name(source_name)` when streams are discovered and connected, however in the `transport_params`, these properties are kept independent. 
 
