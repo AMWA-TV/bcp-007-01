@@ -265,7 +265,7 @@ The IP address and port that the sender is utilizing for the stream. If specifie
  - `source_address` and `source_name`
  - `source_address`
 
- Native NDI Devices will not necessarily support all these methods, so Controllers and Devices SHOULD specify as much information as is known in `transport_params`. If the NDI is not provided with one or more of the above parameters, but is able to determine the additional parameters, it MUST report these updated `transport_params` upon activation.
+ Native NDI Devices will not necessarily support all these methods, so Controllers and Devices SHOULD specify as much information as is known in `transport_params`. If the NDI Receiver is not provided with one or more of the above parameters, but is able to determine the additional parameters, it MUST report these updated `transport_params` upon activation.
  
 ## Controllers
 
