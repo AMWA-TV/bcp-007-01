@@ -73,9 +73,9 @@ An NMOS Sender which implements the NDI transport.
 
 An NMOS Receiver which implements the NDI transport.
 
-### NDI Full Bandwidth
+### NDI High Bandwidth
 
-An NDI stream which utilizes proprietary codecs for audio and video. NDI Full Bandwidth is supported by both the NDI Standard SDK and NDI Advanced SDK.
+An NDI stream which utilizes proprietary codecs for audio and video. NDI High Bandwidth is supported by both the NDI Standard SDK and NDI Advanced SDK.
 
 ### NDI HX, NDI HX2, NDI HX3
 
@@ -89,7 +89,7 @@ NDI High Efficiency profiles, named **NDI HX**, **NDI HX2**, and **NDI HX3**, ut
 
 ### NDI
 
-This document uses the term "NDI" when referring to all NDI variants, and specify "NDI Full Bandwidth", "NDI HX", "NDI HX2", or "NDI HX3" where the text applies to specific NDI variants.
+This document uses the term "NDI" when referring to all NDI variants, and specify "NDI High Bandwidth", "NDI HX", "NDI HX2", or "NDI HX3" where the text applies to specific NDI variants.
 
 ## Native NDI Model
 
@@ -133,7 +133,7 @@ The mux Flow MUST have parent video and/or audio sub-Flows identifying the sub-F
 
 #### Video sub-Flows
 
-For NDI Full Bandwidth the video sub-Flows `media_type` attribute MUST be `video/raw`.
+For NDI High Bandwidth the video sub-Flows `media_type` attribute MUST be `video/raw`.
 
 For NDI HX, HX2 and HX3 the video sub-Flows `media_type` attribute MUST be `video/H264` or `video/H265`.
 
@@ -143,7 +143,7 @@ NDI video+alpha video flows MUST be modeled as a single video sub-Flow, includin
 
 #### Audio sub-Flows
 
-For NDI Full Bandwidth the audio sub-Flows `media_type` SHOULD be a supported PCM type such as `audio/L16`, `audio/L20`, or `audio/L24`.
+For NDI High Bandwidth the audio sub-Flows `media_type` SHOULD be a supported PCM type such as `audio/L16`, `audio/L20`, or `audio/L24`.
 
 For NDI HX, HX2 and HX3 the audio sub-Flows `media_type` attribute MUST be `audio/mpeg4-generic` or `audio/opus`.
 
@@ -161,7 +161,7 @@ NDI Senders MUST be associated with a mux Flow.
 
 #### NDI Group Tags
 
-NDI Senders MAY specify the NDI groups through use of tags. NDI Group Tags SHALL use the URN `urn:x-nmos:transport:ndi:group`. Multiple tags MAY be specified, for example:
+NDI Senders MUST specify the NDI groups, through use of tags. NDI group tag MUST use the URN `urn:x-nmos:transport:ndi:group`. The NDI group tag can have multiple values to represent multiple NDI groups, for example:
 ```json
 "tags": {
    "urn:x-nmos:tag:transport:ndi:group": [
@@ -170,7 +170,6 @@ NDI Senders MAY specify the NDI groups through use of tags. NDI Group Tags SHALL
    ]
 }
 ```
-If NDI Group Tags are not specified, it is assumed the sender is part of the default NDI group.
 
 ### Receivers
 
@@ -209,12 +208,13 @@ The IS-05 schemas `sender_transport_params_ndi.json` and `constraints_schema_sen
   {
     "machine_name": "ndi-machine-name",
     "source_name": "ndi-sender-unique-name",
-    "source_url" : "..."
+    "source_url" : "...",
+    "source_address" : "10.10.10.123:5906"
   }
 ]
 ```
 #### machine_name
-The name of the sender node in the NDI domain. A node SHALL report the machine name being utilized by the NDI SDK. A controller SHOULD NOT specify a new `machine_name` but SHOULD use `auto` or the current `machine_name`. 
+The name of the sender node in the NDI domain. A node SHALL report the machine name being utilized by the NDI SDK. A controller SHOULD NOT specify a new `machine_name` but SHOULD use `null` or the current `machine_name`. 
 
 #### source_name
 The name of the NDI stream created by the Native NDI Sender in the NDI domain. This parameter SHALL NOT be concatenated with `machine_name` in the format `machine_name(source_name)`.
@@ -222,7 +222,7 @@ The name of the NDI stream created by the Native NDI Sender in the NDI domain. T
 | Informative note: In the NDI domain, the `source_name` and `machine_name` are concatenatedin the format `machine_name(source_name)` when streams are discovered and connected, however in the `transport_params`, these properties are kept independent.
 
 #### source_url 
-The URL of the sender as utilized by the NDI SDK. Sender MUST report this upon activation. The contents are proprietary to the NDI SDK and SHOULD NOT be interpreted. A controller SHOULD specify `auto` or the current value when setting this property. If a controller does not specify `source_url` when updating the transport parameters, the sender shall treat it as `auto`.
+The URL of the sender as utilized by the NDI SDK. Sender MUST report this upon activation. The contents are proprietary to the NDI SDK and SHOULD NOT be interpreted. A controller SHOULD specify `auto` or the current value when setting this property. 
 
 ### Receiver Parameters
 
@@ -233,10 +233,13 @@ The IS-05 schemas `receiver_transport_params_ndi.json` and `constraints_schema_r
   {
     "machine_name": "ndi-machine-name",
     "source_name": "ndi-sender-unique-name",
-    "source_url" : "..."
+    "source_url" : "...",
+    "source_address" : "10.10.10.123:5906"
   }
 ]
 ```
+
+machine name / source name SHOULD always be specified. Others MAY be specified.
 
 #### machine_name
 This indicates the device name of the Native NDI Sender that is to be connected, as utilized by the NDI SDK.
@@ -250,7 +253,7 @@ The name of the Native NDI Sender stream in the NDI domain that is to be connect
 The URL of the sender as utilized by the NDI SDK. The contents are proprietary to the NDI SDK and SHOULD NOT be interpreted. A controller SHOULD specify this parameter with values provided by a sender's `transport_params` or the NDI SDK discovery methods. If this parameter is set to `null` or `auto`, the receiver shall determine for itself the value of `source_url`.
 
 ### Receiver Bahavior 
- When making a connection in the NDI domain, the source stream may be specified by the combination of `machine_name` and `source_name`, or the `source_url`. If `machine_name` and `source_name` are specified in a receiver's `transport_params`, then `source_url` MAY be set to `null` or `auto`. If `source_url` is specified in a receiver's `transport_params`, both `machine_name` and `source_name` MAY be set to `null` or `auto`, however in this case, `machine_name` and `source_name` MUST be set to the same value.
+ When making a connection in the NDI domain, the source stream MAY be specified by the combination of `machine_name` and `source_name`, or the `source_url`. If `machine_name` and `source_name` are specified in a receiver's `transport_params`, then `source_url` MAY be set to `null` or `auto`. If `source_url` is specified in a receiver's `transport_params`, both `machine_name` and `source_name` MAY be set to `null` or `auto`, however in this case, `machine_name` and `source_name` MUST be set to the same value.
 
 ## Controllers
 
