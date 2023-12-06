@@ -213,19 +213,21 @@ The IS-05 schemas `sender_transport_params_ndi.json` and `constraints_schema_sen
   }
 ]
 ```
+NDI Senders MUST specify `machine_name` and `source_name` in the Sender `transport_params`. Senders MAY also specify `source_url` and `source_address`.
+
 #### machine_name
 The name of the sender node in the NDI domain. A node MUST report the machine name being utilized by the NDI SDK. A controller SHOULD NOT specify a new `machine_name` but SHOULD use `auto` or the current `machine_name`. 
 
 #### source_name
-The name of the NDI stream created by the Native NDI Sender in the NDI domain. This parameter MUST NOT be concatenated with `machine_name` in the format `machine_name(source_name)`.
+The name of the NDI stream created by the Native NDI Sender in the NDI domain. A node MUST report the sender name being utilized bythe NDI SDK. This parameter MUST NOT be concatenated with `machine_name` in the format `machine_name(source_name)`.
 
 > Informative note: In the NDI domain, the `source_name` and `machine_name` are concatenated in the format `machine_name(source_name)` when streams are discovered and connected, however in the `transport_params`, these properties are kept independent.
 
 #### source_url 
-The URL of the sender as utilized by the NDI SDK. Sender SHOULD report this upon activation. The contents are proprietary to the NDI SDK and SHOULD NOT be interpreted. A controller SHOULD specify `auto` or the current value when setting this property. 
+The URL of the Native NDI Sender as utilized by the NDI SDK. The contents are proprietary to the NDI SDK and SHOULD NOT be interpreted. A controller SHOULD specify `auto` or the current value when setting this property. 
 
 #### source_address
-The IP address and port that the sender is utilizing for the stream. It MUST be in the format `ip_address:port_number`.
+The IP address and port that the sender is utilizing for the stream. If specified, it MUST be in the format `ip_address:port_number`, otherwise it MUST be set to `null`.
 
 ### Receiver Parameters
 
@@ -242,7 +244,7 @@ The IS-05 schemas `receiver_transport_params_ndi.json` and `constraints_schema_r
 ]
 ```
 
-machine name / source name SHOULD always be specified. Others MAY be specified.
+When making a connection, `machine_name` and `source_name` MUST be specified in Receiver `transport_params`; `source_url` and `source_address` MAY also be specified in Receiver `transport_params`.
 
 #### machine_name
 This indicates the device name of the Native NDI Sender that is to be connected, as utilized by the NDI SDK.
@@ -253,10 +255,10 @@ The name of the Native NDI Sender stream in the NDI domain that is to be connect
 > Informative notes: In the NDI domain, the `source_name` and `machine_name` are concatenated in the format `machine_name(source_name)` when streams are discovered and connected, however in the `transport_params`, these properties are kept independent. 
 
 #### source_url 
-The URL of the sender as utilized by the NDI SDK. The contents are proprietary to the NDI SDK and SHOULD NOT be interpreted. A controller SHOULD specify this parameter with values provided by a sender's `transport_params` or the NDI SDK discovery methods. If this parameter is set to `null`, the receiver MUST determine for itself the value of `source_url`.
+The URL of the NDI Native Sender as utilized by the NDI SDK. The contents are proprietary to the NDI SDK and SHOULD NOT be interpreted. This parameter MUST be set to `null` if it is not known.
 
 #### source_address
-The IP address and port that the sender is utilizing for the stream. If specified, it MUST be in the format `ip_address:port_number`, other wise it MUST be set to `null` if not known.
+The IP address and port that the sender is utilizing for the stream. If specified, it MUST be in the format `ip_address:port_number`, otherwise it MUST be set to `null` if not known.
 
 ## IS-05 Connection Bahavior 
  Connections in the NDI domain can be specified in several different ways. In each case the Native NDI Receiver identifies the stream to be connected through at least one of:
@@ -265,8 +267,10 @@ The IP address and port that the sender is utilizing for the stream. If specifie
  - `source_address` and `source_name`
  - `source_address`
 
+In order to activate a connection, `machine_name` and `source_name` MUST be specified by a controller in the Receiver `transport_params`. In order to make connections across subnets, `source_url` or `source_address` MUST also be specified.
+
  Native NDI Devices will not necessarily support all these methods, so Controllers and Devices SHOULD specify as much information as is known in `transport_params`. If the NDI Receiver is not provided with one or more of the above parameters, but is able to determine the additional parameters, it MAY report these updated `transport_params` upon activation.
- 
+
 ## Controllers
 
 A controller MUST be able to discover NDI Senders and NDI Receivers by using the query API.
