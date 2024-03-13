@@ -215,18 +215,26 @@ The IS-05 schemas `sender_transport_params_ndi.json` and `constraints_schema_sen
 NDI Senders MUST specify `machine_name` and `source_name` in the Sender `transport_params`. Senders MAY also specify `source_url` and `source_address`.
 
 #### machine_name
-The device name of the Native NDI Sender as utilized by the NDI SDK. The Sender MUST specify the `machine_name`. If a controller updates this parameter, it MUST specify the existing value or `auto`, as it MUST NOT specify a new `machine_name`.
+The device name of the Native NDI Sender as utilized by the NDI SDK. The Sender MUST specify the `machine_name`. Senders MUST constrain this parameter with appropriate values.  Controllers updating this parameter MUST specify a `machine_name` which is in the Sender contraints or `auto` to allow the Sender to determine the `machine_name`.  
+
+> Informative note: If a Sender does not wish a controller to change the `machine_name`, the constraint set would contain the current NDI device name and `auto` only.
 
 #### source_name
-The name of the Native NDI Sender stream in the NDI domain that is to be connected. This property MUST NOT be concatenatedwith `machine_name` in the format `machine_name (source_name)`. The Sender MUST specify the `source_name` if the Sender is activated. A controller MAY modify this parameter.
+The name of the Native NDI Sender stream in the NDI domain. This property MUST NOT be concatenated with `machine_name` in the format `machine_name (source_name)`. The Sender MUST specify the `source_name`. 
+
+A controller MAY modify this parameter within the supported constraints of the Sender.
 
 > Informative note: In the NDI domain, the `source_name` and `machine_name` are concatenated in the format `machine_name (source_name)` when streams are discovered and connected, however in the `transport_params`, these properties are kept independent.
 
 #### source_url 
-The URL of the Native NDI Sender as utilized by the NDI SDK. The contents are proprietary to the NDI SDK and SHOULD NOT be interpreted. A controller SHOULD specify `auto`, in which case the Sender MAY determine the value of `source_url`.
+The URL of the Native NDI Sender as utilized by the NDI SDK. The contents are proprietary to the NDI SDK and SHOULD NOT be interpreted. If unspecified, it MUST be set to `null`. Senders MUST constrain this parameter with appropriate values.
+
+Controllers updating this parameter MUST specify a `source_url` which is in the Sender contraints or `auto` to allow the Sender to determine the `source_url`.  
 
 #### source_address
-The IP address and port that the sender is utilizing for the stream. If specified, it MUST be in the format `ip_address:port_number`, otherwise it MUST be set to `null`.
+The IP address and port that the sender is utilizing for the stream. `source_address` MUST be in the format `ip_address:port_number` or be `null`. 
+
+Controllers updating this parameter MUST specify a `source_address` which is in the Sender contraints or `auto` to allow the Sender to determine the `source_address`.
 
 ### Receiver Parameters
 
@@ -242,20 +250,29 @@ The IS-05 schemas `receiver_transport_params_ndi.json` and `constraints_schema_r
   }
 ]
 ```
+NDI Receivers MUST support `machine_name` and `source_name` in the Receiver `transport_params`. Receivers MAY also support `source_url` and `source_address`.
 
 #### machine_name
-The device name of the Native NDI Sender that is to be connected, as utilized by the NDI SDK. A controller MUST specify  `machine_name` when making a connection.
+The device name of the Native NDI Sender that is to be connected, as utilized by the NDI SDK. 
+
+A controller MUST specify `machine_name` when making a connection.
 
 #### source_name
-The name of the Native NDI Sender stream in the NDI domain that is to be connected. This property MUST NOT be concatenatedwith `machine_name` in the format `machine_name (source_name)`. A controller MUST specify `source_name` when making a connection.
+The name of the Native NDI Sender stream in the NDI domain that is to be connected. This property MUST NOT be concatenated with `machine_name` in the format `machine_name (source_name)`. 
+
+A controller MUST specify `source_name` when making a connection.
 
 > Informative notes: In the NDI domain, the `source_name` and `machine_name` are concatenated in the format `machine_name (source_name)` when streams are discovered and connected, however in the `transport_params`, these properties are kept independent. 
 
 #### source_url 
-The URL of the NDI Native Sender as utilized by the NDI SDK. The contents are proprietary to the NDI SDK and SHOULD NOT be interpreted. A controller MAY specify `source_url` when making a connection if it is known, otherwise the controller MUST set it to `null`.
+The URL of the NDI Native Sender as utilized by the NDI SDK. The contents are proprietary to the NDI SDK and SHOULD NOT be interpreted. 
+
+If supported by the Receiver, a controller MAY specify `source_url` when making a connection if it is known, otherwise the controller MUST set it to `null`.
 
 #### source_address
-The IP address and port that the sender is utilizing for the stream. A controller MAY specify `source_address` when making a connection if it is known, in which case it MUST be in the format `ip_address:port_number`, otherwise it MUST be set to `null` if not known.
+The IP address and port that the sender is utilizing for the stream. `source_address` MUST be in the format `ip_address:port_number` or be `null`. 
+
+If supported by the Receiver, a controller SHOULD specify `source_address` when making a connection if it is known, otherwise the controller MUST set it to `null`.
 
 
 ## Controllers
