@@ -161,7 +161,7 @@ NDI Senders MUST be associated with a mux Flow.
 
 #### NDI Group Tags
 
-NDI Senders MUST specify the NDI groups, through use of tags. NDI group tag MUST use the URN `urn:x-nmos:transport:ndi:group`. The NDI group tag could have multiple values to represent multiple NDI groups, for example:
+NDI Senders MUST specify the NDI groups, through use of tags. NDI group tag MUST use the URN `urn:x-nmos:tag:transport:ndi:group`. The NDI group tag could have multiple values to represent multiple NDI groups, for example:
 ```json
 "tags": {
    "urn:x-nmos:tag:transport:ndi:group": [
@@ -207,12 +207,13 @@ The IS-05 schemas `sender_transport_params_ndi.json` and `constraints_schema_sen
     "machine_name": "ndi-machine-name",
     "source_name": "ndi-sender-unique-name",
     "source_url" : "...",
-    "source_address" : "10.10.10.123:5906"
+    "source_ip" : "10.10.10.123",
+    "source_port" : "5906"
   }
 ]
 ```
 
-NDI Senders MUST specify `machine_name` and `source_name` in the Sender `transport_params`. Senders MAY also specify `source_url` and `source_address`.
+NDI Senders MUST specify `machine_name` and `source_name` in the Sender `transport_params`. Senders MAY also specify `source_url`, `source_ip` and `source_port`.
 
 #### machine_name
 The device name of the Native NDI Sender as utilized by the NDI SDK. The Sender MUST specify the `machine_name`. Senders MUST constrain this parameter with appropriate values.  Controllers updating this parameter MUST specify a `machine_name` which is in the Sender contraints or `auto` to allow the Sender to determine the `machine_name`.  
@@ -231,10 +232,15 @@ The URL of the Native NDI Sender as utilized by the NDI SDK. The contents are pr
 
 Controllers updating this parameter MUST specify a `source_url` which is in the Sender contraints or `auto` to allow the Sender to determine the `source_url`.  
 
-#### source_address
-The IP address and port that the sender is utilizing for the stream. `source_address` MUST be in the format `ip_address:port_number` or be `null`. 
+#### source_ip
+The IP address that the sender is utilizing for the stream. If a sender or controller specifies the `source_ip` it MUST also specify `source_port`.
 
-Controllers updating this parameter MUST specify a `source_address` which is in the Sender contraints or `auto` to allow the Sender to determine the `source_address`.
+Controllers updating this parameter MUST specify a `source_ip` which is in the Sender contraints or `auto` to allow the Sender to determine the `source_ip`.
+
+### source_port
+The port number that the sender is utilizing for the stream. If a sender or controller specifies the `source_port` it MUST also specify `source_ip`.
+
+Controllers updating this parameter MUST specify a `source_port` which is in the Sender contraints or `auto` to allow the Sender to determine the `source_port`.
 
 ### Receiver Parameters
 
@@ -246,11 +252,13 @@ The IS-05 schemas `receiver_transport_params_ndi.json` and `constraints_schema_r
     "machine_name": "ndi-machine-name",
     "source_name": "ndi-sender-unique-name",
     "source_url" : "...",
-    "source_address" : "10.10.10.123:5906"
+    "source_ip" : "10.10.10.123",
+    "source_port" : "5906",
+    "interface_ip" : "10.10.10.2"
   }
 ]
 ```
-NDI Receivers MUST support `machine_name` and `source_name` in the Receiver `transport_params`. Receivers MAY also support `source_url` and `source_address`.
+NDI Receivers MUST support `machine_name` and `source_name` in the Receiver `transport_params`. Receivers MAY also support `source_url`, `source_ip` , `source_port` and `interface_ip`.
 
 #### machine_name
 The device name of the Native NDI Sender that is to be connected, as utilized by the NDI SDK. 
@@ -269,10 +277,18 @@ The URL of the NDI Native Sender as utilized by the NDI SDK. The contents are pr
 
 If supported by the Receiver, a controller MAY specify `source_url` when making a connection if it is known, otherwise the controller MUST set it to `null`.
 
-#### source_address
-The IP address and port that the sender is utilizing for the stream. `source_address` MUST be in the format `ip_address:port_number` or be `null`. 
+#### source_ip
+The IP address that the sender is utilizing for the stream. If a receiver or controller specifies the `source_ip` it MUST also specify `source_port`.
 
-If supported by the Receiver, a controller SHOULD specify `source_address` when making a connection if it is known, otherwise the controller MUST set it to `null`.
+If supported by the Receiver, a controller SHOULD specify `source_ip` when making a connection if it is known, otherwise the controller MUST set it to `null`.
+
+### source_port
+The port number that the sender is utilizing for the stream. If a receiver or controller specifies the `source_port` it MUST also specify `source_ip`.
+
+If supported by the Receiver, a controller SHOULD specify `source_port` when making a connection if it is known, otherwise the controller MUST set it to `null`.
+
+### interface_ip
+IP address of the network interface the receiver SHOULD use. The receiver SHOULD provide an enum in the constraints endpoint, which contain the available interface addresses. If set to `auto` the receiver MUST determine which interface to use for itself.
 
 
 ## Controllers
