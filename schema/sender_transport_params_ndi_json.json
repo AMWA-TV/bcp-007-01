@@ -1,0 +1,71 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Describes the transport parameters associated with the NDI transport. The constraints in this schema are minimum constraints, but may be further constrained at the constraints endpoint. NDI Senders MUST specify machine_name and source_name in the Sender transport_params. Senders MAY also specify source_url, source_address or source_port",
+    "title": "NDI Sender Transport Parameters",
+    "type": "object",
+    "properties": {
+      "machine_name": {
+        "type": [
+          "string"
+        ],
+        "description": "The device name of the Native NDI Sender as utilized by the NDI SDK. The Sender MUST specify the machine_name. Senders MUST constrain this parameter with appropriate values. Controllers updating this parameter MUST specify a machine_name which is in the Sender contraints or auto to allow the Sender to determine the machine_name.",
+        "anyOf": [{
+            "pattern": "^auto$"
+          },{
+            "format": "string"
+          }
+        ]
+      },
+      "source_name": {
+        "type": [
+          "string"
+        ],
+        "description": "The name of the Native NDI Sender stream in the NDI domain. This property MUST NOT be concatenated with machine_name in the format machine_name (source_name). The Sender MUST specify the source_name. A controller MAY modify this parameter within the supported constraints of the Sender."
+      },        
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The URL of the Native NDI Sender as utilized by the NDI SDK. The contents are proprietary to the NDI SDK and SHOULD NOT be interpreted. If unspecified, it MUST be set to null. Senders MUST constrain this parameter with appropriate values. Controllers updating this parameter MUST specify a source_url which is in the Sender contraints or auto to allow the Sender to determine the source_url.",
+        "anyOf": [{
+            "pattern": "^auto$"
+          },{
+            "format": "string"
+          },{
+            "type": "null"
+          }
+        ]
+      },
+      "source_ip": {
+        "type": [
+          "string"
+        ],
+        "description": "The IP address that the sender is utilizing for the stream. If a sender or controller specifies the source_address it MUST also specify source_port. Controllers updating this parameter MUST specify a source_address which is in the Sender contraints or auto to allow the Sender to determine the source_address.",
+        "anyOf": [{
+            "pattern": "^auto$"
+          }, {
+            "format": "ipv4"
+          }, {
+            "format": "ipv6"
+          }
+        ]
+      },
+      "source_port": {
+        "type": [
+          "integer",
+          "string"
+        ],
+        "description": "The port number that the sender is utilizing for the stream. If a sender or controller specifies the source_port it MUST also specify source_address. Controllers updating this parameter MUST specify a source_port which is in the Sender contraints or auto to allow the Sender to determine the source_port.",
+        "minimum": 0,
+        "maximum": 65535,
+        "pattern": "^auto$"
+      }
+    },
+    "patternProperties": {
+      "^ext_[a-zA-Z0-9_]+$": {
+        "$ref": "sender_transport_params_ext.json"
+      }
+    },
+    "additionalProperties": false
+  }
