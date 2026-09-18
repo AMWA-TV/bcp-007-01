@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      <url>
+        <loc>https://specs.amwa.tv/new/bcp-007-01/v1.0-dev/</loc>
+      </url>
+      <url>
+        <loc>https://specs.amwa.tv/new/bcp-007-01/v1.0-dev/schemas/</loc>
+      </url>
+      <url>
+        <loc>https://specs.amwa.tv/new/bcp-007-01/v1.0-dev/schemas/constraint-schema/</loc>
+      </url>
+      <url>
+        <loc>https://specs.amwa.tv/new/bcp-007-01/v1.0-dev/schemas/receiver_transport_constraints_ndi/</loc>
+      </url>
+      <url>
+        <loc>https://specs.amwa.tv/new/bcp-007-01/v1.0-dev/schemas/receiver_transport_params_ext/</loc>
+      </url>
+      <url>
+        <loc>https://specs.amwa.tv/new/bcp-007-01/v1.0-dev/schemas/receiver_transport_params_ndi_json/</loc>
+      </url>
+      <url>
+        <loc>https://specs.amwa.tv/new/bcp-007-01/v1.0-dev/schemas/sender_transport_constraints_ndi/</loc>
+      </url>
+      <url>
+        <loc>https://specs.amwa.tv/new/bcp-007-01/v1.0-dev/schemas/sender_transport_params_ext/</loc>
+      </url>
+      <url>
+        <loc>https://specs.amwa.tv/new/bcp-007-01/v1.0-dev/schemas/sender_transport_params_ndi_json/</loc>
+      </url>
+</urlset>

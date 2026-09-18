@@ -1,0 +1,1518 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://specs.amwa.tv/new/bcp-007-01/v1.0-dev/Overview/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.62">
+    
+    
+      
+        <title>AMWA BCP-007-01: NMOS With NDI - [Work In Progress] AMWA BCP-007-01: NMOS With NDI</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../assets/stylesheets/modern/main.ce62732f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../stylesheets/amwa-branding.css">
+    
+    <script>__md_scope=new URL("..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#amwa-bcp-007-01-nmos-with-ndi" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="./.." title="[Work In Progress] AMWA BCP-007-01: NMOS With NDI" class="md-header__button md-logo" aria-label="[Work In Progress] AMWA BCP-007-01: NMOS With NDI" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            [Work In Progress] AMWA BCP-007-01: NMOS With NDI
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AMWA BCP-007-01: NMOS With NDI
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+        <a href="https://github.com/AMWA-TV/bcp-007-01" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    AMWA-TV/bcp-007-01
+  </div>
+</a>
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="./.." title="[Work In Progress] AMWA BCP-007-01: NMOS With NDI" class="md-nav__button md-logo" aria-label="[Work In Progress] AMWA BCP-007-01: NMOS With NDI" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    [Work In Progress] AMWA BCP-007-01: NMOS With NDI
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/AMWA-TV/bcp-007-01" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    AMWA-TV/bcp-007-01
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  [Work In Progress] AMWA BCP-007-01: NMOS With NDI
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  JSON Schemas
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  JSON Schemas
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schemas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  JSON Schemas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schemas/constraint-schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  constraint-schema
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schemas/receiver_transport_constraints_ndi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  receiver_transport_constraints_ndi
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schemas/receiver_transport_params_ext/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  receiver_transport_params_ext
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schemas/receiver_transport_params_ndi_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  receiver_transport_params_ndi_json
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schemas/sender_transport_constraints_ndi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  sender_transport_constraints_ndi
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schemas/sender_transport_params_ext/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  sender_transport_params_ext
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schemas/sender_transport_params_ndi_json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  sender_transport_params_ndi_json
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Introduction
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-of-normative-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Use of Normative Language
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Dependencies
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Definitions
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ndi-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI SDK
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#native-ndi-device" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Native NDI Device
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-nmos-ndi-device" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Non-NMOS NDI Device
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndi-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI Stream
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#native-ndi-sender" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Native NDI Sender
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#native-ndi-receiver" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Native NDI Receiver
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndi-device" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI Device
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndi-sender" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI Sender
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndi-receiver" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI Receiver
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndi-high-bandwidth" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI High Bandwidth
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndi-hx-ndi-hx2-ndi-hx3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI HX, NDI HX2, NDI HX3
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndi" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#native-ndi-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Native NDI Model
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Native NDI Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ndi-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI Metadata
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nmos-ndi-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NMOS-NDI Model
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NMOS-NDI Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#non-nmos-connections-to-ndi-devices" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Non-NMOS Connections to NDI Devices
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiplexed-flow-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Multiplexed Flow Model
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ndi-is-04-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI IS-04 Resources
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NDI IS-04 Resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Flows
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Flows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mux-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        MUX Flow
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#video-sub-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Video sub-Flows
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#audio-sub-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Audio sub-Flows
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Sources
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#senders" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Senders
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Senders">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ndi-group-tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI Group Tags
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receivers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receivers
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Receivers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#receiver-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receiver Capabilities
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ndi-is-05-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI IS-05 Resources
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NDI IS-05 Resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transport-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Transport Type
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sender-transport_file" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Sender transport_file
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sender-transport-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Sender Transport Parameters
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sender Transport Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#machine_name" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        machine_name
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source_name" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        source_name
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source_url" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        source_url
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source_ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        source_ip
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source_port" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        source_port
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiver-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receiver Parameters
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Receiver Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#machine_name_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        machine_name
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source_name_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        source_name
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source_url_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        source_url
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source_ip_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        source_ip
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source_port_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        source_port
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interface_ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        interface_ip
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controllers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Controllers
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-case-scenarios-informative" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Use Case Scenarios (Informative)
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Use Case Scenarios (Informative)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-case-1-ndi-sender-to-ndi-receiver-is-05-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Use Case 1: NDI Sender to NDI Receiver - IS-05 Connection
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-case-2-native-ndi-sender-to-ndi-receiver-is-05-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Use Case 2: Native NDI Sender to NDI Receiver - IS-05 Connection
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-case-3-native-ndi-sender-to-ndi-receiver-non-nmos-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Use Case 3: Native NDI Sender to NDI Receiver - Non-NMOS Connection
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-case-4-ndi-sender-to-native-ndi-receiver-non-nmos-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Use Case 4: NDI Sender to Native NDI Receiver - Non-NMOS Connection
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-case-5-native-ndi-sender-to-native-ndi-receiver-non-nmos-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Use Case 5: Native NDI Sender to Native NDI Receiver - Non-NMOS Connection
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-case-6-ndi-sender-to-ndi-receiver-non-nmos-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Use Case 6: NDI Sender to NDI Receiver - Non-NMOS Connection
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+  
+
+
+<h1 id="amwa-bcp-007-01-nmos-with-ndi">AMWA BCP-007-01: NMOS With NDI</h1>
+<p><em>(c) AMWA 2023, CC Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)</em></p>
+<h2 id="introduction">Introduction</h2>
+<p>NDI (Network Display Interface) is an IP transport and control technology created by Newtek. NDI® is a registered trademark of Vizrt NDI AB. It includes definitions of encoding, transport and provides a full SDK to implement IP media transport. This document outlines how NDI devices can be managed through NMOS IS-04 and IS-05.</p>
+<p>Familiarity with the <a href="https://jt-nm.org/reference-architecture/">JT-NM Reference Architecture</a> and the <a href="https://ndi.video/sdk/">NDI® SDK</a> are assumed.</p>
+<p>See also the <a href="https://specs.amwa.tv/nmos/main/docs/Technical_Overview.html">NMOS Technical Overview</a>.</p>
+<h2 id="use-of-normative-language">Use of Normative Language</h2>
+<p>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
+and "OPTIONAL" in this document are to be interpreted as described in <a href="https://datatracker.ietf.org/doc/html/rfc2119">RFC-2119</a>.</p>
+<h2 id="dependencies">Dependencies</h2>
+<p>This document was written based upon <a href="https://ndi.video/sdk/">NDI® Advanced SDK Version 5.5</a>, however devices which implement other versions of the SDK could also be supported.</p>
+<p>This document depends upon the following reference documents:</p>
+<ul>
+<li><a href="https://specs.amwa.tv/is-04/">NMOS IS-04 - Discovery and Registration</a></li>
+<li><a href="https://specs.amwa.tv/is-05/">NMOS IS-05 - Device Connection Management</a></li>
+<li><a href="https://specs.amwa.tv/bcp-004-01/">NMOS BCP-004-01 - Receiver Capabilities</a></li>
+<li><a href="https://specs.amwa.tv/bcp-006-02/">NMOS BCP-006-02 - NMOS with H.264</a></li>
+<li><a href="https://specs.amwa.tv/bcp-006-03/">NMOS BCP-006-03 - NMOS with H.265</a></li>
+</ul>
+<h2 id="definitions">Definitions</h2>
+<p>The NMOS terms ‘Controller’, ‘Node’, ‘Source’, ‘Flow’, ‘Sender’, ‘Receiver’ are used as defined in the <a href="https://specs.amwa.tv/nmos/main/docs/Glossary.html">NMOS Glossary</a>.</p>
+<p>This specification also defines the following terms:</p>
+<h3 id="ndi-sdk">NDI SDK</h3>
+<p>The NDI Software Development Kit (SDK) is offered in two variants. The base version is referred to here as <strong>NDI Standard SDK</strong>, The Advanced SDK is be referred to here as <strong>NDI Advanced SDK</strong>. References to <strong>NDI SDK</strong> apply to both <strong>NDI Standard SDK</strong> and <strong>NDI Advanced SDK</strong>.</p>
+<h3 id="native-ndi-device">Native NDI Device</h3>
+<p>A “device” as defined in the NDI SDK. This is not the same as a “Device” as defined in the NMOS Glossary. Note that the same apparatus could simultaneously act as an NMOS Device and a Native NDI Device.</p>
+<h3 id="non-nmos-ndi-device">Non-NMOS NDI Device</h3>
+<p>A Native NDI Device which does not support the NMOS specifications.</p>
+<h3 id="ndi-stream">NDI Stream</h3>
+<p>A "stream" as defined in the NDI SDK. An NDI Stream is a multiplexed structure that could include one or more video, audio and metadata flows.</p>
+<h3 id="native-ndi-sender">Native NDI Sender</h3>
+<p>A "sender" of an NDI stream as defined in the NDI SDK. This is not the same as a “Sender” as defined in the NMOS Glossary. Note that the same apparatus could simultaneously act as an NMOS Sender and a Native NDI Sender.</p>
+<h3 id="native-ndi-receiver">Native NDI Receiver</h3>
+<p>A "receiver" of an NDI stream as defined in the NDI SDK. This is not the same as a “Receiver” as defined in the NMOS Glossary. Note that the same apparatus could simultaneously act as an NMOS Receiver and a Native NDI Receiver.</p>
+<h3 id="ndi-device">NDI Device</h3>
+<p>A Native NDI Device which implements IS-04 and allows registration in an NMOS Registry and implements IS-05 for connection management.</p>
+<h3 id="ndi-sender">NDI Sender</h3>
+<p>An NMOS Sender which implements the NDI transport.</p>
+<h3 id="ndi-receiver">NDI Receiver</h3>
+<p>An NMOS Receiver which implements the NDI transport.</p>
+<h3 id="ndi-high-bandwidth">NDI High Bandwidth</h3>
+<p>An NDI stream which utilizes proprietary codecs for audio and video. NDI High Bandwidth is supported by both the NDI Standard SDK and NDI Advanced SDK.</p>
+<h3 id="ndi-hx-ndi-hx2-ndi-hx3">NDI HX, NDI HX2, NDI HX3</h3>
+<p>NDI High Efficiency profiles, named <strong>NDI HX</strong>, <strong>NDI HX2</strong>, and <strong>NDI HX3</strong>, utilize H.264/AVC, H.265/HEVC, AAC and Opus codecs. These are supported by the NDI Advanced SDK only.</p>
+<p><strong>NDI HX</strong> utilizes Long-GOP H.264 video encoding at maximum Full HD resolution and AAC audio encoding. NDI HX is sometimes stylized <strong>NDI|HX</strong> in some documentation.</p>
+<p><strong>NDI HX2</strong> utilizes H.264 or H.265 Long-GOP video coding up to UHD resolution and AAC or Opus audio encoding. NDI HX2 is sometimes stylized <strong>NDI|HX2</strong> in some documentation.</p>
+<p><strong>NDI HX3</strong> utilizes H.264 or H.265 Short-GOP video coding up to UHD resolution and AAC or Opus audio encoding. NDI HX3 is sometimes stylized <strong>NDI|HX3</strong> in some documentation.</p>
+<h3 id="ndi">NDI</h3>
+<p>This document uses the term "NDI" when referring to all NDI variants, and specify "NDI High Bandwidth", "NDI HX", "NDI HX2", or "NDI HX3" where the text applies to specific NDI variants.</p>
+<h2 id="native-ndi-model">Native NDI Model</h2>
+<p>NDI Streams utilize a variety of codecs to compress media. In many cases, the NDI SDK negotiates between Native NDI Devices to select the transport and encoding parameters used for an NDI Stream. A Native NDI Receiver does not learn about the encoding and transport parameters of an NDI Stream until a connection is established.</p>
+<p>The NDI SDK, by default, automatically selects and negotiates encoding parameters between Native NDI Devices. Media content enters the Native NDI Sender as raw, uncompressed media and raw, uncompressed media emerges from Native NDI Receivers.</p>
+<p>The NDI Advanced SDK supports compressed NDI Streams utilizing H.264, H.265, AAC and Opus codecs. Media content enters the Native NDI Sender as compressed media and compressed media emerges from Native NDI Receivers.</p>
+<h3 id="ndi-metadata">NDI Metadata</h3>
+<p>Metadata connections can be implicitly established by the NDI SDK when video connections are established. In some cases, bi-directional metadata connections can be established by the NDI SDK between the Native NDI Sender and Native NDI Receiver. In such cases, NDI Metadata is not represented explicitly in NMOS.</p>
+<h2 id="nmos-ndi-model">NMOS-NDI Model</h2>
+<p>Native NDI Devices, Native NDI Receivers and Native NDI Senders are represented by NMOS Devices/Nodes, Receivers and Senders respectively.</p>
+<p>A controller which supports NDI connection management via IS-05 MUST support connection of NDI Receivers to NDI Senders. This controller MAY also support connection of NDI Receivers to Native NDI senders, however the discovery of such senders is outside the scope of this document.</p>
+<h3 id="non-nmos-connections-to-ndi-devices">Non-NMOS Connections to NDI Devices</h3>
+<p>If an NDI Stream is connected to an NDI Receiver outside of IS-05, the transport parameters of the Connection API of the Receiver MUST be updated to reflect the running parameters which have been set via the alternate protocol. The Receiver MUST update its IS-04 resource <code>subscription.active</code> property accordingly, set <code>subscription.sender_id</code> to <code>null</code> and increment it's version number. If the resource has been registered with an NMOS registry the entry MUST be updated to match the Node API.</p>
+<h3 id="multiplexed-flow-model">Multiplexed Flow Model</h3>
+<p>Receivers of NDI Streams MUST have the <code>format</code> attribute set to <code>urn:x-nmos:format:mux</code> and Senders of NDI Streams MUST be associated with a Flow having the <code>format</code> attribute set to <code>urn:x-nmos:format:mux</code>, as NDI connections could contain multiple essences including video, audio and metadata.</p>
+<p>A Flow of <code>urn:x-nmos:format:mux</code> format MUST have parents video or audio sub-Flows. The current NDI SDK limits to a maximum of one of each video, audio and metadata sub-Flow, but this specification supports future SDK versions which could support multiple audio, video or metadata sub-Flows.</p>
+<p><img alt="MUX Sender Model" src="../images/NMOS-NDI-Mux-sender-drawio.svg" /></p>
+<h2 id="ndi-is-04-resources">NDI IS-04 Resources</h2>
+<h3 id="flows">Flows</h3>
+<h4 id="mux-flow">MUX Flow</h4>
+<p>An NDI Sender MUST be associated with a mux Flow having the <code>format</code> attribute set to <code>urn:x-nmos:format:mux</code> and the <code>media_type</code> attribute set to <code>application/ndi</code>.</p>
+<p>The mux Flow MUST have parent video and/or audio sub-Flows identifying the sub-Flows multiplexed in the NDI Stream. The mux Flow MUST be associated with a Source of format <code>urn:x-nmos:format:mux</code>.</p>
+<h4 id="video-sub-flows">Video sub-Flows</h4>
+<p>For NDI High Bandwidth the video sub-Flows <code>media_type</code> attribute MUST be <code>video/raw</code>.</p>
+<p>For NDI HX, HX2 and HX3 the video sub-Flows <code>media_type</code> attribute MUST be <code>video/H264</code> or <code>video/H265</code>.</p>
+<p>NDI Senders SHOULD map the employed <code>NDIlib_FourCC_video_type</code> to the NMOS <code>bit-depth</code>, <code>component</code> and <code>sub-sampling</code> properties.</p>
+<p>NDI video+alpha video flows MUST be modeled as a single video sub-Flow, including a channel labelled <code>A</code> in the <code>components</code> parameters for the alpha channel.</p>
+<h4 id="audio-sub-flows">Audio sub-Flows</h4>
+<p>For NDI High Bandwidth the audio sub-Flows <code>media_type</code> SHOULD be a supported PCM type such as <code>audio/L16</code>, <code>audio/L20</code>, or <code>audio/L24</code>.</p>
+<p>For NDI HX, HX2 and HX3 the audio sub-Flows <code>media_type</code> attribute MUST be <code>audio/mpeg4-generic</code> or <code>audio/opus</code>.</p>
+<h3 id="sources">Sources</h3>
+<p>The Source associated with a mux Flow MUST have its <code>format</code> attribute set to <code>urn:x-nmos:format:mux</code> and its <code>parents</code> attribute MUST enumerate the Sources associated with the sub-Flows.</p>
+<h3 id="senders">Senders</h3>
+<p>NDI Senders do not utilize SDP to describe the NDI Stream; therefore NDI Senders MUST have their <code>manifest_href</code> attribute set to <code>null</code>.</p>
+<p>NDI Senders MUST have their <code>transport</code> attribute set to <code>urn:x-nmos:transport:ndi</code>.</p>
+<p>NDI Senders MUST be associated with a mux Flow.</p>
+<h4 id="ndi-group-tags">NDI Group Tags</h4>
+<p>NDI Senders MUST specify the NDI groups, through use of tags. NDI group tag MUST use the URN <code>urn:x-nmos:tag:transport:ndi:group</code>. The NDI group tag could have multiple values to represent multiple NDI groups, for example:
+<div class="highlight"><pre><span></span><code><span class="nt">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="nt">"urn:x-nmos:tag:transport:ndi:group"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">"Cameras"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"Studio-A"</span>
+<span class="w">   </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h3 id="receivers">Receivers</h3>
+<p>The NDI Receiver MUST have its <code>format</code> attribute set to <code>urn:x-nmos:format:mux</code>.</p>
+<h4 id="receiver-capabilities">Receiver Capabilities</h4>
+<p>An NDI Receiver MUST specify as a minimum the following capabilities:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">"caps"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"media_types"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">       </span><span class="s2">"application/ndi"</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="ndi-is-05-resources">NDI IS-05 Resources</h2>
+<h3 id="transport-type">Transport Type</h3>
+<p>The IS-05 transport for NDI is <code>urn:x-nmos:transport:ndi</code>.</p>
+<h3 id="sender-transport_file">Sender transport_file</h3>
+<p>Not used.</p>
+<h3 id="sender-transport-parameters">Sender Transport Parameters</h3>
+<p>The IS-05 schemas <code>sender_transport_params_ndi.json</code> and <code>constraints_schema_sender_ndi.json</code> describe the transport parameters associated with the NDI transport.</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"machine_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ndi-machine-name"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"source_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ndi-sender-unique-name"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"source_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"source_ip"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"10.10.10.123"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"source_port"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"5906"</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>NDI Senders MUST specify <code>machine_name</code> and <code>source_name</code> in the Sender <code>transport_params</code>. Senders MAY also specify <code>source_url</code>, <code>source_ip</code> and <code>source_port</code>.</p>
+<h4 id="machine_name">machine_name</h4>
+<p>The device name of the Native NDI Sender as utilized by the NDI SDK. The Sender MUST specify the <code>machine_name</code>. Senders MUST constrain this parameter with appropriate values.  Controllers updating this parameter MUST specify a <code>machine_name</code> which is in the Sender contraints or <code>auto</code> to allow the Sender to determine the <code>machine_name</code>.  </p>
+<blockquote>
+<p>Informative note: If a Sender does not wish a controller to change the <code>machine_name</code>, the constraint set would contain the current NDI device name and <code>auto</code> only.</p>
+</blockquote>
+<h4 id="source_name">source_name</h4>
+<p>The name of the Native NDI Sender stream in the NDI domain. This property MUST NOT be concatenated with <code>machine_name</code> in the format <code>machine_name (source_name)</code>. The Sender MUST specify the <code>source_name</code>. </p>
+<p>A controller MAY modify this parameter within the supported constraints of the Sender.</p>
+<blockquote>
+<p>Informative note: In the NDI domain, the <code>source_name</code> and <code>machine_name</code> are concatenated in the format <code>machine_name (source_name)</code> when streams are discovered and connected, however in the <code>transport_params</code>, these properties are kept independent.</p>
+</blockquote>
+<h4 id="source_url">source_url</h4>
+<p>The URL of the Native NDI Sender as utilized by the NDI SDK. The contents are proprietary to the NDI SDK and interpretation is not recommended. If unspecified, it MUST be set to <code>null</code>. Senders MUST constrain this parameter with appropriate values.</p>
+<p>Controllers updating this parameter MUST specify a <code>source_url</code> which is in the Sender contraints or <code>auto</code> to allow the Sender to determine the <code>source_url</code>.  </p>
+<h4 id="source_ip">source_ip</h4>
+<p>The IP address that the sender is utilizing for the stream. If a sender or controller specifies the <code>source_ip</code> it MUST also specify <code>source_port</code>.</p>
+<p>Controllers updating this parameter MUST specify a <code>source_ip</code> which is in the Sender contraints or <code>auto</code> to allow the Sender to determine the <code>source_ip</code>.</p>
+<h3 id="source_port">source_port</h3>
+<p>The port number that the sender is utilizing for the stream. If a sender or controller specifies the <code>source_port</code> it MUST also specify <code>source_ip</code>.</p>
+<p>Controllers updating this parameter MUST specify a <code>source_port</code> which is in the Sender contraints or <code>auto</code> to allow the Sender to determine the <code>source_port</code>.</p>
+<h3 id="receiver-parameters">Receiver Parameters</h3>
+<p>The IS-05 schemas <code>receiver_transport_params_ndi.json</code> and <code>constraints_schema_receiver_ndi.json</code> describe the transport parameters associated with the NDI transport.</p>
+<p><div class="highlight"><pre><span></span><code><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"machine_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ndi-machine-name"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"source_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ndi-sender-unique-name"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"source_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"source_ip"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"10.10.10.123"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"source_port"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"5906"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"interface_ip"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"10.10.10.2"</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+NDI Receivers MUST support <code>machine_name</code> and <code>source_name</code> in the Receiver <code>transport_params</code>. Receivers MAY also support <code>source_url</code>, <code>source_ip</code> , <code>source_port</code> and <code>interface_ip</code>.</p>
+<h4 id="machine_name_1">machine_name</h4>
+<p>The device name of the Native NDI Sender that is to be connected, as utilized by the NDI SDK. </p>
+<p>A controller MUST specify <code>machine_name</code> when making a connection.</p>
+<h4 id="source_name_1">source_name</h4>
+<p>The name of the Native NDI Sender stream in the NDI domain that is to be connected. This property MUST NOT be concatenated with <code>machine_name</code> in the format <code>machine_name (source_name)</code>. </p>
+<p>A controller MUST specify <code>source_name</code> when making a connection.</p>
+<blockquote>
+<p>Informative notes: In the NDI domain, the <code>source_name</code> and <code>machine_name</code> are concatenated in the format <code>machine_name (source_name)</code> when streams are discovered and connected, however in the <code>transport_params</code>, these properties are kept independent. </p>
+</blockquote>
+<h4 id="source_url_1">source_url</h4>
+<p>The URL of the NDI Native Sender as utilized by the NDI SDK. The contents are proprietary to the NDI SDK and SHOULD NOT be interpreted. </p>
+<p>If supported by the Receiver, a controller MAY specify <code>source_url</code> when making a connection if it is known, otherwise the controller MUST set it to <code>null</code>.</p>
+<h4 id="source_ip_1">source_ip</h4>
+<p>The IP address that the sender is utilizing for the stream. If a receiver or controller specifies the <code>source_ip</code> it MUST also specify <code>source_port</code>.</p>
+<p>If supported by the Receiver, a controller SHOULD specify <code>source_ip</code> when making a connection if it is known, otherwise the controller MUST set it to <code>null</code>.</p>
+<h3 id="source_port_1">source_port</h3>
+<p>The port number that the sender is utilizing for the stream. If a receiver or controller specifies the <code>source_port</code> it MUST also specify <code>source_ip</code>.</p>
+<p>If supported by the Receiver, a controller SHOULD specify <code>source_port</code> when making a connection if it is known, otherwise the controller MUST set it to <code>null</code>.</p>
+<h3 id="interface_ip">interface_ip</h3>
+<p>IP address of the network interface the receiver SHOULD use. The receiver SHOULD provide an enum in the constraints endpoint, which contain the available interface addresses. If set to <code>auto</code> the receiver MUST determine which interface to use for itself.</p>
+<h2 id="controllers">Controllers</h2>
+<p>A controller MUST be able to discover NDI Senders and NDI Receivers by using the query API.</p>
+<p>A controller MUST be able to connect an NDI Receiver to an NDI Sender by using the IS-05 API. See example <a href="#use-case-1-ndi-sender-to-ndi-receiver---is-05-connection">Use Case 1</a>.</p>
+<p>A controller MAY be able to discover Native NDI Senders.</p>
+<p>A controller MAY be able to connect an NDI Receiver to a Native NDI Sender by using the IS-05 API. See example <a href="#use-case-2-native-ndi-sender-to-ndi-receiver---is-05-connection">Use Case 2</a>.</p>
+<h2 id="use-case-scenarios-informative">Use Case Scenarios (Informative)</h2>
+<p>Use cases are informative only and provided as examples.</p>
+<p><img alt="NMOS-NDI Model" src="../images/NMOS-NDI-Ecosystem-drawio.svg" /></p>
+<h3 id="use-case-1-ndi-sender-to-ndi-receiver-is-05-connection">Use Case 1: NDI Sender to NDI Receiver - IS-05 Connection</h3>
+<p><img alt="NMOS-NDI Model" src="../images/NMOS-NDI-UseCase1-drawio.svg" /></p>
+<ul>
+<li>Controller is informed of sender (device C) through IS-04.</li>
+<li>Controller is informed of receiver (device D) through IS-04.</li>
+<li>Controller initiates connection to receiver (device D) from sender (device C) via IS-05.</li>
+<li>NDI Receiver (device D) reports its connections status and transport parameters as outlined in IS-04 and IS-05.</li>
+</ul>
+<h3 id="use-case-2-native-ndi-sender-to-ndi-receiver-is-05-connection">Use Case 2: Native NDI Sender to NDI Receiver - IS-05 Connection</h3>
+<p><img alt="NMOS-NDI Model" src="../images/NMOS-NDI-UseCase2-drawio.svg" /></p>
+<ul>
+<li>Controller is informed of sender (device W) by its own means; this could be via NDI discovery.</li>
+<li>Controller is informed of receiver (device A) through IS-04.</li>
+<li>Controller initiates connection to receiver (device A) from sender (device W) via IS-05.</li>
+<li>NDI Receiver (device A) reports its connections status and transport parameters as outlined in IS-04 and IS-05.</li>
+</ul>
+<h3 id="use-case-3-native-ndi-sender-to-ndi-receiver-non-nmos-connection">Use Case 3: Native NDI Sender to NDI Receiver - Non-NMOS Connection</h3>
+<p><img alt="NMOS-NDI Model" src="../images/NMOS-NDI-UseCase3-drawio.svg" /></p>
+<ul>
+<li>NDI Receiver (device B) is informed of Native NDI Sender (device X) by its own means; this could be via NDI discovery.</li>
+<li>NDI Receiver (device B) initiates connection to Native NDI Sender (device X) directly via NDI SDK.</li>
+<li>NDI Receiver updates its IS-04 <code>active</code> state, sets the <code>sender_id</code> to <code>null</code>, increments the version number.</li>
+<li>The controller does not initiate the connection, but can monitor the connection status via IS-04 and IS-05.</li>
+</ul>
+<h3 id="use-case-4-ndi-sender-to-native-ndi-receiver-non-nmos-connection">Use Case 4: NDI Sender to Native NDI Receiver - Non-NMOS Connection</h3>
+<p><img alt="NMOS-NDI Model" src="../images/NMOS-NDI-UseCase4-drawio.svg" /></p>
+<ul>
+<li>In this scenario, it is assumed the NDI Sender is active.</li>
+<li>Native NDI Receiver (device X) is informed of NDI Sender (device B) by its own means; this could be via NDI discovery.</li>
+<li>Native NDI Receiver (device X) initiates connection to NDI Sender (device B) directly via NDI SDK.</li>
+<li>The controller does not initiate the connection and cannot monitor the state of the connection.</li>
+</ul>
+<h3 id="use-case-5-native-ndi-sender-to-native-ndi-receiver-non-nmos-connection">Use Case 5: Native NDI Sender to Native NDI Receiver - Non-NMOS Connection</h3>
+<p><img alt="NMOS-NDI Model" src="../images/NMOS-NDI-UseCase5-drawio.svg" /></p>
+<ul>
+<li>This scenario exists outside the realm of NMOS. The controller might not be aware of these devices, and does not initiate any connection between them.</li>
+<li>Native NDI Receiver (device Z) and Native NDI Sender (device Y) discover through their own means; this could be via NDI discovery.</li>
+<li>Connection from Native NDI Sender (device Y) to Native NDI Receiver (device Z) is performed by the NDI SDK.</li>
+</ul>
+<h3 id="use-case-6-ndi-sender-to-ndi-receiver-non-nmos-connection">Use Case 6: NDI Sender to NDI Receiver - Non-NMOS Connection</h3>
+<p><img alt="NMOS-NDI Model" src="../images/NMOS-NDI-UseCase6-drawio.svg" /></p>
+<ul>
+<li>In this scenario, it is assumed the NDI Sender is active.</li>
+<li>In this scenario, both sender (device E) and receiver (device F) are NMOS devices, but connection is established outside of IS-05.</li>
+<li>NDI Receiver (device E) and NDI Sender (device F) discover through their own means; this could be via NDI discovery.</li>
+<li>Connection from NDI Sender (device E) to NDI Receiver (device F) is performed by the NDI SDK.</li>
+<li>NDI Receiver updates its IS-04 <code>active</code> state, sets the <code>sender_id</code> to <code>null</code>, increments the version number.</li>
+<li>The controller does not initiate the connection, but can monitor the connection status via IS-04 and IS-05.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      
+      
+        
+        
+      <script id="__config" type="application/json">{"annotate":null,"base":"..","features":[],"redirect":null,"search":"../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"provider":"mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.8dcc8e9c.min.js"></script>
+      
+        <script src="../javascripts/json-viewer.js"></script>
+      
+        <script src="../javascripts/amwa-branding.js"></script>
+      
+    
+  </body>
+</html>

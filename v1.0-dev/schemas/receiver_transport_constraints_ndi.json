@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "Used to express the dynamic constraints on NDI receiver transport parameters. These constraints may be set and changed at runtime. Every transport parameter supported must have an entry, even if it is only an empty object.",
+  "patternProperties": {
+    "^ext_[a-zA-Z0-9_]+$":{
+      "$ref": "constraint-schema.json#/definitions/constraint"
+    }
+  },
+  "properties": {
+    "machine_name": {
+      "$ref": "constraint-schema.json#/definitions/constraint"
+    },
+    "source_name": {
+      "$ref": "constraint-schema.json#/definitions/constraint"
+    },
+    "source_url": {
+      "$ref": "constraint-schema.json#/definitions/constraint"
+    },
+    "source_ip": {
+      "$ref": "constraint-schema.json#/definitions/constraint"
+    },
+    "source_port": {
+      "$ref": "constraint-schema.json#/definitions/constraint"
+    },    
+    "interface_ip": {
+      "$ref": "constraint-schema.json#/definitions/constraint"
+    }
+  }
+}

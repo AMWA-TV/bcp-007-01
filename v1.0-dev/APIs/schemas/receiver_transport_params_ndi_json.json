@@ -1,0 +1,98 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Describes the transport parameters associated with the NDI transport. The constraints in this schema are minimum constraints, but may be further constrained at the constraints endpoint. NDI Receivers MUST support machine_name and source_name in the Receiver transport_params. Receivers MAY also support source_url, source_address and source_port.",
+    "title": "NDI Receiver Transport Parameters",
+    "type": "object",
+    "properties": {
+      "machine_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The device name of the Native NDI Sender that is to be connected, as utilized by the NDI SDK. A controller MUST specify machine_name when making a connection. A null value indicates that the Receiver has not yet been configured.",
+        "anyOf": [
+          {
+            "format": "string"
+          }, {
+            "type": "null"
+          }
+        ]
+      },
+      "source_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The name of the Native NDI Sender stream in the NDI domain that is to be connected. This property MUST NOT be concatenated with machine_name in the format machine_name (source_name). A controller MUST specify source_name when making a connection. A null value indicates that the Receiver has not yet been configured.",
+        "anyOf": [
+          {
+            "format": "string"
+          }, {
+            "type": "null"
+          }
+        ]
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The URL of the NDI Native Sender as utilized by the NDI SDK. The contents are proprietary to the NDI SDK and SHOULD NOT be interpreted.If supported by the Receiver, a controller MAY specify source_url when making a connection if it is known, otherwise the controller MUST set it to null.",
+        "anyOf": [
+          {
+            "format": "string"
+          }, {
+            "type": "null"
+          }
+        ]
+      },
+      "source_ip": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The IP address that the sender is utilizing for the stream. If a receiver or controller specifies the source_address it MUST also specify source_port. If supported by the Receiver, a controller SHOULD specify source_address when making a connection if it is known, otherwise the controller MUST set it to null",
+        "anyOf": [
+          {
+            "format": "ipv4"
+          }, {
+            "format": "ipv6"
+          }, {
+            "type": "null"
+          }
+        ]
+      },
+      "source_port": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "The port number that the sender is utilizing for the stream. If a receiver or controller specifies the source_port it MUST also specify source_address. If supported by the Receiver, a controller SHOULD specify source_port when making a connection if it is known, otherwise the controller MUST set it to null.",
+        "anyOf": [{
+            "minimum": 0,
+            "maximum": 65535
+          }, {
+            "type": "null" 
+          }
+        ]
+      },
+      "interface_ip": {
+        "type": "string",
+        "description": "IP address of the network interface the receiver should use. The receiver should provide an enum in the constraints endpoint, which contain the available interface addresses. If set to auto the receiver must determine which interface to use for itself.",
+        "anyOf": [{
+            "format": "ipv4"
+          }, {
+            "format": "ipv6"
+          }, {
+            "pattern": "^auto$"
+          }
+        ]
+      }
+    },
+    "patternProperties": {
+      "^ext_[a-zA-Z0-9_]+$": {
+        "$ref": "receiver_transport_params_ext.json"
+      }
+    },
+    "additionalProperties": false
+  }
