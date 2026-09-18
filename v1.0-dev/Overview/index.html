@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://specs.amwa.tv/new/bcp-007-01/v1.0-dev/Overview/">
       
       
+        <link rel="prev" href="./..">
+      
+      
+        <link rel="next" href="../schemas/">
       
       
         
@@ -21,7 +25,7 @@
     
     
       
-        <title>AMWA BCP-007-01: NMOS With NDI - [Work In Progress] AMWA BCP-007-01: NMOS With NDI</title>
+        <title>Overview - [Work In Progress] AMWA BCP-007-01: NMOS With NDI</title>
       
     
     
@@ -109,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              AMWA BCP-007-01: NMOS With NDI
+              Overview
             
           </span>
         </div>
@@ -225,6 +229,805 @@
       
   
   
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Documentation
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Documentation
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Overview
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Overview
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Introduction
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-of-normative-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Use of Normative Language
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Dependencies
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Definitions
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ndi-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI SDK
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#native-ndi-device" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Native NDI Device
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-nmos-ndi-device" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Non-NMOS NDI Device
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndi-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI Stream
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#native-ndi-sender" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Native NDI Sender
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#native-ndi-receiver" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Native NDI Receiver
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndi-device" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI Device
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndi-sender" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI Sender
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndi-receiver" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI Receiver
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndi-high-bandwidth" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI High Bandwidth
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndi-hx-ndi-hx2-ndi-hx3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI HX, NDI HX2, NDI HX3
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ndi" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#native-ndi-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Native NDI Model
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Native NDI Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ndi-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI Metadata
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nmos-ndi-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NMOS-NDI Model
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NMOS-NDI Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#non-nmos-connections-to-ndi-devices" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Non-NMOS Connections to NDI Devices
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiplexed-flow-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Multiplexed Flow Model
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ndi-is-04-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI IS-04 Resources
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NDI IS-04 Resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Flows
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Flows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mux-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        MUX Flow
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#video-sub-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Video sub-Flows
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#audio-sub-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Audio sub-Flows
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Sources
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#senders" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Senders
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Senders">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ndi-group-tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI Group Tags
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receivers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receivers
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Receivers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#receiver-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receiver Capabilities
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ndi-is-05-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NDI IS-05 Resources
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NDI IS-05 Resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transport-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Transport Type
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sender-transport_file" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Sender transport_file
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sender-transport-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Sender Transport Parameters
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sender Transport Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#machine_name" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        machine_name
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source_name" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        source_name
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source_url" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        source_url
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source_ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        source_ip
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source_port" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        source_port
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiver-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Receiver Parameters
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Receiver Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#machine_name_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        machine_name
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source_name_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        source_name
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source_url_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        source_url
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source_ip_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        source_ip
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source_port_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        source_port
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interface_ip" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        interface_ip
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controllers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Controllers
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-case-scenarios-informative" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Use Case Scenarios (Informative)
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Use Case Scenarios (Informative)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-case-1-ndi-sender-to-ndi-receiver-is-05-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Use Case 1: NDI Sender to NDI Receiver - IS-05 Connection
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-case-2-native-ndi-sender-to-ndi-receiver-is-05-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Use Case 2: Native NDI Sender to NDI Receiver - IS-05 Connection
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-case-3-native-ndi-sender-to-ndi-receiver-non-nmos-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Use Case 3: Native NDI Sender to NDI Receiver - Non-NMOS Connection
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-case-4-ndi-sender-to-native-ndi-receiver-non-nmos-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Use Case 4: NDI Sender to Native NDI Receiver - Non-NMOS Connection
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-case-5-native-ndi-sender-to-native-ndi-receiver-non-nmos-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Use Case 5: Native NDI Sender to Native NDI Receiver - Non-NMOS Connection
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-case-6-ndi-sender-to-ndi-receiver-non-nmos-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Use Case 6: NDI Sender to NDI Receiver - Non-NMOS Connection
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
   
   
     
@@ -236,10 +1039,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
   
   
@@ -256,8 +1059,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
   
